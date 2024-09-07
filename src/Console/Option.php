@@ -32,6 +32,5 @@ final readonly class Option
         public bool $required_value = false,
         public ?string $default = null,
         public string $description = '',
-    ) {
-    }
+    ) {}
 }

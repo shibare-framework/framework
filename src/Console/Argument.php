@@ -30,6 +30,5 @@ final /* readonly */ class Argument
         public readonly bool $required = false,
         public readonly ?string $default = null,
         public readonly string $description = '',
-    ) {
-    }
+    ) {}
 }

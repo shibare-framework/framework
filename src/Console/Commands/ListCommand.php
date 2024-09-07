@@ -25,8 +25,7 @@ final class ListCommand implements CommandInterface
      */
     public function __construct(
         private readonly array $commands,
-    ) {
-    }
+    ) {}
 
     public function getCommandName(): string
     {

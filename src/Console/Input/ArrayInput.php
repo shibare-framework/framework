@@ -30,8 +30,7 @@ final readonly class ArrayInput implements InputInterface
      */
     public function __construct(
         public array $input,
-    ) {
-    }
+    ) {}
 
     public function getCommandName(): ?string
     {
