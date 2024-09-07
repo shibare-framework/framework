@@ -7,14 +7,14 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Rayleigh\HttpMessage;
+namespace Shibare\HttpMessage;
 
 use Psr\Http\Message\StreamInterface;
 
 /**
  * PSR-7 Stream implementation
  * This class is mutable because resource stream can be edited in methods.
- * @package Rayleigh\HttpMessage
+ * @package Shibare\HttpMessage
  * @final prefer to use decorator pattern when you extend this class
  * @link https://github.com/Nyholm/psr7/blob/master/doc/final.md
  */

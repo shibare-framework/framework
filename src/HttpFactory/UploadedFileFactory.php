@@ -7,16 +7,16 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Rayleigh\HttpFactory;
+namespace Shibare\HttpFactory;
 
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\UploadedFileFactoryInterface;
 use Psr\Http\Message\UploadedFileInterface;
-use Rayleigh\HttpMessage\UploadedFile;
+use Shibare\HttpMessage\UploadedFile;
 
 /**
  * PSR-17 UploadedFile factory implementation
- * @package Rayleigh\HttpFactory
+ * @package Shibare\HttpFactory
  */
 final /* readonly */ class UploadedFileFactory implements UploadedFileFactoryInterface
 {

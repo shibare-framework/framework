@@ -7,13 +7,13 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Rayleigh\Log\Writers;
+namespace Shibare\Log\Writers;
 
-use Rayleigh\Log\FormatterInterface;
+use Shibare\Log\FormatterInterface;
 
 /**
  * php://stdout writer
- * @package Rayleigh\Log\Writers
+ * @package Shibare\Log\Writers
  */
 /* readonly */ class StdoutWriter extends StreamWriter
 {

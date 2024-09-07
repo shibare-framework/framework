@@ -7,19 +7,19 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Rayleigh\HttpServer\Tests;
+namespace Shibare\HttpServer\Tests;
 
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
-use Rayleigh\HttpServer\Emitter;
-use Rayleigh\HttpServer\ResponseEmitter;
+use Shibare\HttpServer\Emitter;
+use Shibare\HttpServer\ResponseEmitter;
 
 /**
  * Class ResponseEmitterTest
- * @package Rayleigh\HttpServer\Tests
+ * @package Shibare\HttpServer\Tests
  */
 #[CoversClass(ResponseEmitter::class)]
 final class ResponseEmitterTest extends TestCase

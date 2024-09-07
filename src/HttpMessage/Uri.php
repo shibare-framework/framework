@@ -4,21 +4,21 @@ declare(strict_types=1);
 
 /**
  * Class Uri
- * @package Rayleigh\HttpMessage
+ * @package Shibare\HttpMessage
  * @author Masaru Yamagishi <akai_inu@live.jp>
  * @license Apache-2.0
  */
 
-namespace Rayleigh\HttpMessage;
+namespace Shibare\HttpMessage;
 
-use Rayleigh\HttpMessage\Internal\UriPartsParser;
+use Shibare\HttpMessage\Internal\UriPartsParser;
 use JsonSerializable;
 use Psr\Http\Message\UriInterface;
 use Stringable;
 
 /**
  * PSR-7 URI implementation
- * @package Rayleigh\HttpMessage
+ * @package Shibare\HttpMessage
  * @see https://datatracker.ietf.org/doc/html/rfc3986#section-3
  *
  * ```

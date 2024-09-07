@@ -1,4 +1,4 @@
-# Rayleigh HTTP Message PSR-7 Component
+# Shibare HTTP Message PSR-7 Component
 
 Implementation of PSR-7 HTTP Messages
 

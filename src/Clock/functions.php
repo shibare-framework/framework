@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Rayleigh\Clock;
+namespace Shibare\Clock;
 
 use DateTimeImmutable;
 
 /**
  * Class ClockTest
- * @package Rayleigh\Clock
+ * @package Shibare\Clock
  * @author Masaru Yamagishi <akai_inu@live.jp>
  * @license Apache-2.0
  */

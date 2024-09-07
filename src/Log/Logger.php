@@ -7,14 +7,14 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Rayleigh\Log;
+namespace Shibare\Log;
 
 use Psr\Log\AbstractLogger;
 use Stringable;
 
 /**
  * PSR-3 compatible Logger
- * @package Rayleigh\Log
+ * @package Shibare\Log
  */
 /* final readonly */ class Logger extends AbstractLogger
 {

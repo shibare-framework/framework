@@ -4,27 +4,27 @@ declare(strict_types=1);
 
 /**
  * Class UriTest
- * @package Rayleigh\HttpMessage
+ * @package Shibare\HttpMessage
  * @author Masaru Yamagishi <akai_inu@live.jp>
  * @license Apache-2.0
  */
 
-namespace Rayleigh\HttpMessage\Tests;
+namespace Shibare\HttpMessage\Tests;
 
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\TestCase;
-use Rayleigh\HttpMessage\HeaderBag;
-use Rayleigh\HttpMessage\Internal\UriPartsParser;
-use Rayleigh\HttpMessage\ServerRequest;
-use Rayleigh\HttpMessage\Uri;
-use Rayleigh\HttpMessage\UriPlaceholderResolver;
+use Shibare\HttpMessage\HeaderBag;
+use Shibare\HttpMessage\Internal\UriPartsParser;
+use Shibare\HttpMessage\ServerRequest;
+use Shibare\HttpMessage\Uri;
+use Shibare\HttpMessage\UriPlaceholderResolver;
 
 /**
  * Class UriTest
- * @package Rayleigh\HttpMessage\Tests
+ * @package Shibare\HttpMessage\Tests
  */
 #[CoversClass(UriPlaceholderResolver::class)]
 #[UsesClass(ServerRequest::class)]

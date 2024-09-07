@@ -7,13 +7,13 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Rayleigh\Config\Tests;
+namespace Shibare\Config\Tests;
 
 use InvalidArgumentException;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Rayleigh\Config\ArrayConfig;
+use Shibare\Config\ArrayConfig;
 
 #[CoversClass(ArrayConfig::class)]
 final class ArrayConfigTest extends TestCase

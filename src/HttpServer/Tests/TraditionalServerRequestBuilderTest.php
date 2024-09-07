@@ -7,7 +7,7 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Rayleigh\HttpServer\Tests;
+namespace Shibare\HttpServer\Tests;
 
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -18,34 +18,34 @@ use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\UploadedFileInterface;
-use Rayleigh\HttpServer\TraditionalServerRequestBuilder;
+use Shibare\HttpServer\TraditionalServerRequestBuilder;
 
 /**
  * Class TraditionalServerRequestBuilderTest
- * @package Rayleigh\HttpServer\Tests
+ * @package Shibare\HttpServer\Tests
  */
 #[CoversClass(TraditionalServerRequestBuilder::class)]
-#[UsesTrait(\Rayleigh\HttpMessage\HasAttributes::class)]
-#[UsesTrait(\Rayleigh\HttpMessage\HasMethod::class)]
-#[UsesTrait(\Rayleigh\HttpMessage\HasParams::class)]
-#[UsesTrait(\Rayleigh\HttpMessage\HasParsedBody::class)]
-#[UsesTrait(\Rayleigh\HttpMessage\HasProtocolVersion::class)]
-#[UsesTrait(\Rayleigh\HttpMessage\HasUploadedFiles::class)]
-#[UsesClass(\Rayleigh\HttpMessage\HeaderBag::class)]
-#[UsesClass(\Rayleigh\HttpMessage\Internal\UriPartsParser::class)]
-#[UsesClass(\Rayleigh\HttpMessage\Message::class)]
-#[UsesClass(\Rayleigh\HttpMessage\Request::class)]
-#[UsesClass(\Rayleigh\HttpMessage\ServerRequest::class)]
-#[UsesClass(\Rayleigh\HttpMessage\Stream::class)]
-#[UsesClass(\Rayleigh\HttpMessage\UploadedFile::class)]
-#[UsesClass(\Rayleigh\HttpMessage\Uri::class)]
+#[UsesTrait(\Shibare\HttpMessage\HasAttributes::class)]
+#[UsesTrait(\Shibare\HttpMessage\HasMethod::class)]
+#[UsesTrait(\Shibare\HttpMessage\HasParams::class)]
+#[UsesTrait(\Shibare\HttpMessage\HasParsedBody::class)]
+#[UsesTrait(\Shibare\HttpMessage\HasProtocolVersion::class)]
+#[UsesTrait(\Shibare\HttpMessage\HasUploadedFiles::class)]
+#[UsesClass(\Shibare\HttpMessage\HeaderBag::class)]
+#[UsesClass(\Shibare\HttpMessage\Internal\UriPartsParser::class)]
+#[UsesClass(\Shibare\HttpMessage\Message::class)]
+#[UsesClass(\Shibare\HttpMessage\Request::class)]
+#[UsesClass(\Shibare\HttpMessage\ServerRequest::class)]
+#[UsesClass(\Shibare\HttpMessage\Stream::class)]
+#[UsesClass(\Shibare\HttpMessage\UploadedFile::class)]
+#[UsesClass(\Shibare\HttpMessage\Uri::class)]
 final class TraditionalServerRequestBuilderTest extends TestCase
 {
     #[Test]
     public function testBuiltinServer(): void
     {
         $SERVER = [
-            'DOCUMENT_ROOT' => '/app/rayleigh',
+            'DOCUMENT_ROOT' => '/app/shibare',
             'REMOTE_ADDR' => '127.0.0.1',
             'REMOTE_PORT' => '52586',
             'SERVER_SOFTWARE' => 'PHP/8.3.10 (Development Server)',
@@ -55,7 +55,7 @@ final class TraditionalServerRequestBuilderTest extends TestCase
             'REQUEST_URI' => '/test.php?test=foo',
             'REQUEST_METHOD' => 'GET',
             'SCRIPT_NAME' => '/test.php',
-            'SCRIPT_FILENAME' => '/app/rayleigh/test.php',
+            'SCRIPT_FILENAME' => '/app/shibare/test.php',
             'PHP_SELF' => '/test.php',
             'QUERY_STRING' => 'test=foo',
             'HTTP_HOST' => 'localhost:8080',

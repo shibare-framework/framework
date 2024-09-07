@@ -7,14 +7,14 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Rayleigh\HttpServer;
+namespace Shibare\HttpServer;
 
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
 /**
  * Route information
- * @package Rayleigh\HttpServer
+ * @package Shibare\HttpServer
  * @psalm-suppress PossiblyUnusedProperty
  */
 final /* readonly */ class Route

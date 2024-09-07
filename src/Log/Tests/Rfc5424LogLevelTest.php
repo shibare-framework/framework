@@ -7,18 +7,18 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Rayleigh\Log\Tests;
+namespace Shibare\Log\Tests;
 
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LogLevel;
-use Rayleigh\Log\Rfc5424LogLevel;
+use Shibare\Log\Rfc5424LogLevel;
 
 /**
  * Class Rfc5424LogLevelTest
- * @package Rayleigh\Log\Tests
+ * @package Shibare\Log\Tests
  */
 #[CoversClass(Rfc5424LogLevel::class)]
 final class Rfc5424LogLevelTest extends TestCase

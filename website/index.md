@@ -3,7 +3,7 @@
 layout: home
 
 hero:
-  name: "Rayleigh PHP"
+  name: "Shibare PHP"
   text: "Simple, Short, Smart PHP Framework"
   tagline: My great project tagline
   actions:

@@ -7,13 +7,13 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Rayleigh\Console;
+namespace Shibare\Console;
 
 use RuntimeException;
 
 /**
  * Console CommandCannotBeInstanciatedException
- * @package Rayleigh\Console
+ * @package Shibare\Console
  */
 final class CommandCannotBeInstanciatedException extends RuntimeException
 {

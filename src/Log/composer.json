@@ -1,14 +1,14 @@
 {
   "$schema": "https://getcomposer.org/schema.json",
-  "name": "rayleigh/log",
-  "description": "S.S.S. Rayleigh Framework - Log Component",
+  "name": "shibare/log",
+  "description": "S.S.S. Shibare Framework - Log Component",
   "type": "library",
   "keywords": [
-    "rayleigh",
+    "shibare",
     "log",
     "psr3"
   ],
-  "homepage": "https://heavyrain-php.github.io/rayleigh/",
+  "homepage": "https://shibare-framework.github.io/",
   "readme": "README.md",
   "license": "Apache-2.0",
   "authors": [
@@ -20,9 +20,9 @@
     }
   ],
   "support": {
-    "docs": "https://heavyrain-php.github.io/rayleigh/",
-    "issues": "https://github.com/heavyrain-php/rayleigh/issues",
-    "source": "https://github.com/heavyrain-php/rayleigh/"
+    "docs": "https://shibare-framework.github.io/",
+    "issues": "https://github.com/shibare-framework/framework/issues",
+    "source": "https://github.com/shibare-framework/framework/"
   },
   "provide": {
     "psr/log-implementation": "3.0.0"
@@ -39,7 +39,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Rayleigh\\Log\\": ""
+      "Shibare\\Log\\": ""
     },
     "exclude-from-classmap": [
       "Tests/"

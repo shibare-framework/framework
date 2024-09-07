@@ -7,7 +7,7 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Rayleigh\HttpMessage;
+namespace Shibare\HttpMessage;
 
 use InvalidArgumentException;
 use Psr\Http\Message\ServerRequestInterface;
@@ -15,7 +15,7 @@ use Psr\Http\Message\UploadedFileInterface;
 
 /**
  * PSR-7 UploadedFiles trait
- * @package Rayleigh\HttpMessage
+ * @package Shibare\HttpMessage
  */
 trait HasUploadedFiles
 {

@@ -1,13 +1,13 @@
 {
   "$schema": "https://getcomposer.org/schema.json",
-  "name": "rayleigh/config",
-  "description": "S.S.S. Rayleigh Framework - Config Component",
+  "name": "shibare/config",
+  "description": "S.S.S. Shibare Framework - Config Component",
   "type": "library",
   "keywords": [
-    "rayleigh",
+    "shibare",
     "config"
   ],
-  "homepage": "https://heavyrain-php.github.io/rayleigh/",
+  "homepage": "https://shibare-framework.github.io/",
   "readme": "README.md",
   "license": "Apache-2.0",
   "authors": [
@@ -19,9 +19,9 @@
     }
   ],
   "support": {
-    "docs": "https://heavyrain-php.github.io/rayleigh/",
-    "issues": "https://github.com/heavyrain-php/rayleigh/issues",
-    "source": "https://github.com/heavyrain-php/rayleigh/"
+    "docs": "https://shibare-framework.github.io/",
+    "issues": "https://github.com/shibare-framework/framework/issues",
+    "source": "https://github.com/shibare-framework/framework/"
   },
   "provide": {},
   "require": {
@@ -31,7 +31,7 @@
   "suggest": {},
   "autoload": {
     "psr-4": {
-      "Rayleigh\\Config\\": ""
+      "Shibare\\Config\\": ""
     },
     "files": [
       "functions.php"

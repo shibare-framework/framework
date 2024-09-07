@@ -7,19 +7,19 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Rayleigh\Console\Tests;
+namespace Shibare\Console\Tests;
 
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Rayleigh\Console\Commands\ListCommand;
-use Rayleigh\Console\Input\ArrayInput;
-use Rayleigh\Console\Kernel;
-use Rayleigh\Console\Output\ArrayOutput;
+use Shibare\Console\Commands\ListCommand;
+use Shibare\Console\Input\ArrayInput;
+use Shibare\Console\Kernel;
+use Shibare\Console\Output\ArrayOutput;
 
 /**
  * Class KernelTest
- * @package Rayleigh\Console\Tests
+ * @package Shibare\Console\Tests
  */
 #[CoversClass(Kernel::class)]
 #[CoversClass(ArrayInput::class)]

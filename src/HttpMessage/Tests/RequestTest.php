@@ -7,24 +7,24 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Rayleigh\HttpMessage\Tests;
+namespace Shibare\HttpMessage\Tests;
 
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\CoversTrait;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Rayleigh\HttpMessage\HasMethod;
-use Rayleigh\HttpMessage\HasRequestTarget;
-use Rayleigh\HttpMessage\HasUri;
-use Rayleigh\HttpMessage\HeaderBag;
-use Rayleigh\HttpMessage\Internal\UriPartsParser;
-use Rayleigh\HttpMessage\Request;
-use Rayleigh\HttpMessage\Stream;
-use Rayleigh\HttpMessage\Uri;
+use Shibare\HttpMessage\HasMethod;
+use Shibare\HttpMessage\HasRequestTarget;
+use Shibare\HttpMessage\HasUri;
+use Shibare\HttpMessage\HeaderBag;
+use Shibare\HttpMessage\Internal\UriPartsParser;
+use Shibare\HttpMessage\Request;
+use Shibare\HttpMessage\Stream;
+use Shibare\HttpMessage\Uri;
 
 /**
  * Class RequestTest
- * @package Rayleigh\HttpMessage\Tests
+ * @package Shibare\HttpMessage\Tests
  */
 #[CoversClass(HeaderBag::class)]
 #[CoversClass(Request::class)]

@@ -7,16 +7,16 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Rayleigh\HttpMessage\Tests\Internal;
+namespace Shibare\HttpMessage\Tests\Internal;
 
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Rayleigh\HttpMessage\Internal\UriPartsParser;
+use Shibare\HttpMessage\Internal\UriPartsParser;
 
 /**
  * Class UriPartsParserTest
- * @package Rayleigh\HttpMessage\Tests\Internal
+ * @package Shibare\HttpMessage\Tests\Internal
  */
 #[CoversClass(UriPartsParser::class)]
 final class UriPartsParserTest extends TestCase

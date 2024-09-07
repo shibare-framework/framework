@@ -7,14 +7,14 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Rayleigh\HttpMessage\Internal;
+namespace Shibare\HttpMessage\Internal;
 
-use Rayleigh\HttpMessage\MalformedUriException;
-use Rayleigh\HttpMessage\Uri;
+use Shibare\HttpMessage\MalformedUriException;
+use Shibare\HttpMessage\Uri;
 
 /**
  * Parse URI to parts
- * @package Rayleigh\HttpMessage\Internal
+ * @package Shibare\HttpMessage\Internal
  * @internal
  */
 final class UriPartsParser

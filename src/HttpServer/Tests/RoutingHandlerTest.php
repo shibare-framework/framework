@@ -7,7 +7,7 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Rayleigh\HttpServer\Tests;
+namespace Shibare\HttpServer\Tests;
 
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
@@ -17,15 +17,15 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\UriInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Rayleigh\HttpMessage\UriPlaceholderResolver;
-use Rayleigh\HttpServer\Route;
-use Rayleigh\HttpServer\RouteNotFoundException;
-use Rayleigh\HttpServer\RoutingHandler;
-use Rayleigh\HttpServer\ServerRequestRunner;
+use Shibare\HttpMessage\UriPlaceholderResolver;
+use Shibare\HttpServer\Route;
+use Shibare\HttpServer\RouteNotFoundException;
+use Shibare\HttpServer\RoutingHandler;
+use Shibare\HttpServer\ServerRequestRunner;
 
 /**
  * Class RoutingHandlerTest
- * @package Rayleigh\HttpServer\Tests
+ * @package Shibare\HttpServer\Tests
  */
 #[CoversClass(RoutingHandler::class)]
 #[CoversClass(Route::class)]

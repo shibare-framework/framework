@@ -1,14 +1,14 @@
 {
   "$schema": "https://getcomposer.org/schema.json",
-  "name": "rayleigh/http-factory",
-  "description": "S.S.S. Rayleigh Framework - HTTP Factory Component",
+  "name": "shibare/http-factory",
+  "description": "S.S.S. Shibare Framework - HTTP Factory Component",
   "type": "library",
   "keywords": [
-    "rayleigh",
+    "shibare",
     "http",
     "psr17"
   ],
-  "homepage": "https://heavyrain-php.github.io/rayleigh/",
+  "homepage": "https://shibare-framework.github.io/",
   "readme": "README.md",
   "license": "Apache-2.0",
   "authors": [
@@ -20,9 +20,9 @@
     }
   ],
   "support": {
-    "docs": "https://heavyrain-php.github.io/rayleigh/",
-    "issues": "https://github.com/heavyrain-php/rayleigh/issues",
-    "source": "https://github.com/heavyrain-php/rayleigh/"
+    "docs": "https://shibare-framework.github.io/",
+    "issues": "https://github.com/shibare-framework/framework/issues",
+    "source": "https://github.com/shibare-framework/framework/"
   },
   "provide": {
     "psr/http-factory-implementation": "1.1.0"
@@ -30,13 +30,13 @@
   "require": {
     "php": "~8.2.0|~8.3.0",
     "psr/http-factory": "^1.0.0",
-    "rayleigh/http-message": "^0.0.1"
+    "shibare/http-message": "^0.0.1"
   },
   "require-dev": {},
   "suggest": {},
   "autoload": {
     "psr-4": {
-      "Rayleigh\\HttpFactory\\": ""
+      "Shibare\\HttpFactory\\": ""
     },
     "exclude-from-classmap": [
       "Tests/"

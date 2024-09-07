@@ -7,13 +7,13 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Rayleigh\Console;
+namespace Shibare\Console;
 
 use Attribute;
 
 /**
  * Console Option
- * @package Rayleigh\Console
+ * @package Shibare\Console
  */
 #[Attribute(Attribute::TARGET_PROPERTY)]
 final readonly class Option

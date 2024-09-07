@@ -1,15 +1,15 @@
 {
   "$schema": "https://getcomposer.org/schema.json",
-  "name": "rayleigh/clock",
-  "description": "S.S.S. Rayleigh Framework - Clock Component",
+  "name": "shibare/clock",
+  "description": "S.S.S. Shibare Framework - Clock Component",
   "type": "library",
   "keywords": [
-    "rayleigh",
+    "shibare",
     "clock",
     "time",
     "psr20"
   ],
-  "homepage": "https://heavyrain-php.github.io/rayleigh/",
+  "homepage": "https://shibare-framework.github.io/",
   "readme": "README.md",
   "license": "Apache-2.0",
   "authors": [
@@ -21,9 +21,9 @@
     }
   ],
   "support": {
-    "docs": "https://heavyrain-php.github.io/rayleigh/",
-    "issues": "https://github.com/heavyrain-php/rayleigh/issues",
-    "source": "https://github.com/heavyrain-php/rayleigh/"
+    "docs": "https://shibare-framework.github.io/",
+    "issues": "https://github.com/shibare-framework/framework/issues",
+    "source": "https://github.com/shibare-framework/framework/"
   },
   "provide": {
     "psr/clock-implementation": "1.0"
@@ -42,7 +42,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Rayleigh\\Clock\\": ""
+      "Shibare\\Clock\\": ""
     },
     "files": [
       "functions.php"

@@ -7,17 +7,17 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Rayleigh\Log\Tests\Formatters;
+namespace Shibare\Log\Tests\Formatters;
 
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Rayleigh\Log\Formatters\JsonLineFormatter;
-use Rayleigh\Log\Rfc5424LogLevel;
+use Shibare\Log\Formatters\JsonLineFormatter;
+use Shibare\Log\Rfc5424LogLevel;
 
 /**
  * Class JsonLineFormatterTest
- * @package Rayleigh\Log\Tests\Formatters
+ * @package Shibare\Log\Tests\Formatters
  */
 #[CoversClass(JsonLineFormatter::class)]
 #[CoversClass(Rfc5424LogLevel::class)]

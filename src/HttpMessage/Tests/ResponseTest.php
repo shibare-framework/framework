@@ -7,20 +7,20 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Rayleigh\HttpMessage\Tests;
+namespace Shibare\HttpMessage\Tests;
 
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\CoversTrait;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Rayleigh\HttpMessage\HasStatusCode;
-use Rayleigh\HttpMessage\HeaderBag;
-use Rayleigh\HttpMessage\Response;
-use Rayleigh\HttpMessage\Stream;
+use Shibare\HttpMessage\HasStatusCode;
+use Shibare\HttpMessage\HeaderBag;
+use Shibare\HttpMessage\Response;
+use Shibare\HttpMessage\Stream;
 
 /**
  * Class RequestTest
- * @package Rayleigh\HttpMessage\Tests
+ * @package Shibare\HttpMessage\Tests
  */
 #[CoversClass(HeaderBag::class)]
 #[CoversClass(Response::class)]

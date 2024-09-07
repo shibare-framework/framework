@@ -7,15 +7,15 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Rayleigh\Container\Tests;
+namespace Shibare\Container\Tests;
 
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
-use Rayleigh\Container\ClassResolver;
-use Rayleigh\Container\Container;
+use Shibare\Container\ClassResolver;
+use Shibare\Container\Container;
 use ReflectionException;
 
 #[UsesClass(Container::class)]
@@ -29,10 +29,10 @@ final class ClassResolverTest extends TestCase
         $resolver = new ClassResolver($container);
 
         $this->expectException(ReflectionException::class);
-        $this->expectExceptionMessage('Class "Rayleigh\Tests\Container\ClassResolverTesta" does not exist');
+        $this->expectExceptionMessage('Class "Shibare\Tests\Container\ClassResolverTesta" does not exist');
 
         // @phpstan-ignore argument.type
-        $resolver->resolve('Rayleigh\Tests\Container\ClassResolverTesta');
+        $resolver->resolve('Shibare\Tests\Container\ClassResolverTesta');
     }
 
     #[Test]
@@ -52,7 +52,7 @@ final class ClassResolverTest extends TestCase
         $resolver = new ClassResolver($container);
 
         $this->expectException(ReflectionException::class);
-        $this->expectExceptionMessage('circular dependency detected: Rayleigh\Container\Tests\CircularDepsB');
+        $this->expectExceptionMessage('circular dependency detected: Shibare\Container\Tests\CircularDepsB');
 
         $resolver->resolve(CircularDepsA::class);
     }

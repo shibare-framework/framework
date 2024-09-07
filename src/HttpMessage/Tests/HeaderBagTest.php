@@ -7,18 +7,18 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Rayleigh\HttpMessage\Tests;
+namespace Shibare\HttpMessage\Tests;
 
 use InvalidArgumentException;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Rayleigh\HttpMessage\HeaderBag;
+use Shibare\HttpMessage\HeaderBag;
 
 /**
  * Class HeaderBagTest
- * @package Rayleigh\HttpMessage\Tests
+ * @package Shibare\HttpMessage\Tests
  */
 #[CoversClass(HeaderBag::class)]
 final class HeaderBagTest extends TestCase

@@ -4,24 +4,24 @@ declare(strict_types=1);
 
 /**
  * Class UriTest
- * @package Rayleigh\HttpMessage
+ * @package Shibare\HttpMessage
  * @author Masaru Yamagishi <akai_inu@live.jp>
  * @license Apache-2.0
  */
 
-namespace Rayleigh\HttpMessage\Tests;
+namespace Shibare\HttpMessage\Tests;
 
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Rayleigh\HttpMessage\Internal\UriPartsParser;
-use Rayleigh\HttpMessage\MalformedUriException;
-use Rayleigh\HttpMessage\Uri;
+use Shibare\HttpMessage\Internal\UriPartsParser;
+use Shibare\HttpMessage\MalformedUriException;
+use Shibare\HttpMessage\Uri;
 
 /**
  * Class UriTest
- * @package Rayleigh\HttpMessage\Tests
+ * @package Shibare\HttpMessage\Tests
  */
 #[CoversClass(Uri::class)]
 #[CoversClass(UriPartsParser::class)]

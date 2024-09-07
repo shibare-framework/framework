@@ -7,15 +7,15 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Rayleigh\Container\Tests;
+namespace Shibare\Container\Tests;
 
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
-use Rayleigh\Container\ClassResolver;
-use Rayleigh\Container\Container;
+use Shibare\Container\ClassResolver;
+use Shibare\Container\Container;
 
 #[UsesClass(ClassResolver::class)]
 #[CoversClass(Container::class)]

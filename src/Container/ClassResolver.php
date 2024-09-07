@@ -7,7 +7,7 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Rayleigh\Container;
+namespace Shibare\Container;
 
 use Psr\Container\ContainerInterface;
 use ReflectionClass;

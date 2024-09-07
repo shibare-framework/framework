@@ -7,7 +7,7 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Rayleigh\HttpMessage\Tests;
+namespace Shibare\HttpMessage\Tests;
 
 use PHPUnit\Framework\Attributes\AfterClass;
 use PHPUnit\Framework\Attributes\CoversClass;
@@ -15,12 +15,12 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\StreamInterface;
-use Rayleigh\HttpMessage\Stream;
-use Rayleigh\HttpMessage\UploadedFile;
+use Shibare\HttpMessage\Stream;
+use Shibare\HttpMessage\UploadedFile;
 
 /**
  * Class UploadedFileTest
- * @package Rayleigh\HttpMessage\Tests
+ * @package Shibare\HttpMessage\Tests
  */
 #[CoversClass(UploadedFile::class)]
 #[CoversClass(Stream::class)]
@@ -54,7 +54,7 @@ final class UploadedFileTest extends TestCase
 
         yield 'bool true' => [true];
 
-        $temp_file_name = \tempnam(\sys_get_temp_dir(), 'rayleigh_test');
+        $temp_file_name = \tempnam(\sys_get_temp_dir(), 'shibare_test');
         \assert($temp_file_name !== false);
         \file_put_contents($temp_file_name, 'test');
         self::$temp_file_name_list[] = $temp_file_name;
@@ -142,7 +142,7 @@ final class UploadedFileTest extends TestCase
     #[Test]
     public function testMoveToFilePath(): void
     {
-        $temp_file_name = \tempnam(\sys_get_temp_dir(), 'rayleigh_test');
+        $temp_file_name = \tempnam(\sys_get_temp_dir(), 'shibare_test');
         \assert($temp_file_name !== false);
         self::$temp_file_name_list[] = $temp_file_name;
 

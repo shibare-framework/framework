@@ -7,10 +7,10 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Rayleigh\Container;
+namespace Shibare\Container;
 
 use Closure;
-use Rayleigh\Contracts\Container as ContainerInterface;
+use Shibare\Contracts\Container as ContainerInterface;
 use ReflectionFunction;
 use RuntimeException;
 

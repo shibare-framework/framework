@@ -7,34 +7,34 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Rayleigh\HttpFactory\Tests;
+namespace Shibare\HttpFactory\Tests;
 
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\Attributes\UsesTrait;
 use PHPUnit\Framework\TestCase;
-use Rayleigh\HttpFactory\RequestFactory;
-use Rayleigh\HttpFactory\ResponseFactory;
-use Rayleigh\HttpFactory\ServerRequestFactory;
-use Rayleigh\HttpFactory\StreamFactory;
-use Rayleigh\HttpFactory\UploadedFileFactory;
-use Rayleigh\HttpFactory\UriFactory;
-use Rayleigh\HttpMessage\HasMethod;
-use Rayleigh\HttpMessage\HasStatusCode;
-use Rayleigh\HttpMessage\HasUri;
-use Rayleigh\HttpMessage\HeaderBag;
-use Rayleigh\HttpMessage\Internal\UriPartsParser;
-use Rayleigh\HttpMessage\Message;
-use Rayleigh\HttpMessage\Response;
-use Rayleigh\HttpMessage\ServerRequest;
-use Rayleigh\HttpMessage\Stream;
-use Rayleigh\HttpMessage\UploadedFile;
-use Rayleigh\HttpMessage\Uri;
+use Shibare\HttpFactory\RequestFactory;
+use Shibare\HttpFactory\ResponseFactory;
+use Shibare\HttpFactory\ServerRequestFactory;
+use Shibare\HttpFactory\StreamFactory;
+use Shibare\HttpFactory\UploadedFileFactory;
+use Shibare\HttpFactory\UriFactory;
+use Shibare\HttpMessage\HasMethod;
+use Shibare\HttpMessage\HasStatusCode;
+use Shibare\HttpMessage\HasUri;
+use Shibare\HttpMessage\HeaderBag;
+use Shibare\HttpMessage\Internal\UriPartsParser;
+use Shibare\HttpMessage\Message;
+use Shibare\HttpMessage\Response;
+use Shibare\HttpMessage\ServerRequest;
+use Shibare\HttpMessage\Stream;
+use Shibare\HttpMessage\UploadedFile;
+use Shibare\HttpMessage\Uri;
 
 /**
  * Class FactoryTest
- * @package Rayleigh\HttpFactory\Tests
+ * @package Shibare\HttpFactory\Tests
  */
 #[CoversClass(RequestFactory::class)]
 #[CoversClass(ResponseFactory::class)]

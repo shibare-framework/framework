@@ -7,14 +7,14 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Rayleigh\HttpServer;
+namespace Shibare\HttpServer;
 
 use Psr\Http\Message\ResponseInterface;
 use RuntimeException;
 
 /**
  * PSR-7 Response Emitter for traditional web server
- * @package Rayleigh\HttpServer
+ * @package Shibare\HttpServer
  */
 final /* readonly */ class ResponseEmitter
 {

@@ -2,8 +2,8 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  base: "/rayleigh/",
-  title: "Rayleigh PHP",
+  base: "/shibare/",
+  title: "Shibare PHP",
   description: "Simple, Short, Smart PHP Framework",
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config

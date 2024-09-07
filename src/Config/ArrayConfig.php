@@ -7,9 +7,9 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Rayleigh\Config;
+namespace Shibare\Config;
 
-use Rayleigh\Contracts\Config;
+use Shibare\Contracts\Config;
 
 final /* readonly */ class ArrayConfig implements Config
 {

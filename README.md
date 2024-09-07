@@ -1,6 +1,6 @@
-# Rayleigh PHP Simple, Short, Smart Framework
+# Shibare PHP Simple, Short, Smart Framework
 
-![Packagist Version](https://img.shields.io/packagist/v/rayleigh/framework) [![Test](https://github.com/heavyrain-php/rayleigh/actions/workflows/test.yaml/badge.svg)](https://github.com/heavyrain-php/rayleigh/actions/workflows/test.yaml) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=heavyrain-php_rayleigh&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=heavyrain-php_rayleigh)
+![Packagist Version](https://img.shields.io/packagist/v/shibare/framework) [![Test](https://github.com/shibare-framework/framework/actions/workflows/test.yaml/badge.svg)](https://github.com/shibare-framework/framework/actions/workflows/test.yaml)
 
 ## Features
 
@@ -26,7 +26,7 @@
     - [PSR-11: Container Interface](https://www.php-fig.org/psr/psr-11)
     - [PSR-12: Extended Coding Style Guide](https://www.php-fig.org/psr/psr-12)
     - [PSR-14: Event Dispatcher](https://www.php-fig.org/psr/psr-14): TODO
-    - [PSR-15: HTTP Handlers](https://www.php-fig.org/psr/psr-15): WIP
+    - [PSR-15: HTTP Handlers](https://www.php-fig.org/psr/psr-15)
     - [PSR-16: Simple Cache](https://www.php-fig.org/psr/psr-16): TODO
     - [PSR-17: HTTP Factories](https://www.php-fig.org/psr/psr-17)
     - [PSR-18: HTTP Client](https://www.php-fig.org/psr/psr-18): TODO
@@ -35,8 +35,8 @@
 - Smart DI Container, it can bind and resolve anything
 - Smart Database Abstraction with PDO: TODO
 - Supports multiple server runtimes
-    - Traditional(with Apache or nginx): WIP
-    - [RoadRunner](https://roadrunner.dev/) to adopt wider protocols.: TODO
+    - Traditional(with Apache or nginx)
+    - [RoadRunner](https://roadrunner.dev/) to adopt wider protocols.
     - [FrankenPHP](https://frankenphp.dev/): TODO
 - IDL Support
     - [OpenAPI 3.0](https://www.openapis.org/): TODO
@@ -53,8 +53,8 @@
 - download [phive.phar](https://phar.io/)
 
 ```sh
-$ git clone https://github.com/heavyrain-php/rayleigh.git
-$ cd rayleigh
+$ git clone https://github.com/shibare-framework/shibare.git
+$ cd shibare
 $ composer install
 $ phive install
 $ composer lint

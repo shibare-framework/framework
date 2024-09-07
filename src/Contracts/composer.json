@@ -1,14 +1,14 @@
 {
   "$schema": "https://getcomposer.org/schema.json",
-  "name": "rayleigh/contracts",
-  "description": "S.S.S. Rayleigh Framework - Contracts Component",
+  "name": "shibare/contracts",
+  "description": "S.S.S. Shibare Framework - Contracts Component",
   "type": "library",
   "keywords": [
-    "rayleigh",
+    "shibare",
     "contracts",
     "interface"
   ],
-  "homepage": "https://heavyrain-php.github.io/rayleigh/",
+  "homepage": "https://shibare-framework.github.io/",
   "readme": "README.md",
   "license": "Apache-2.0",
   "authors": [
@@ -20,9 +20,9 @@
     }
   ],
   "support": {
-    "docs": "https://heavyrain-php.github.io/rayleigh/",
-    "issues": "https://github.com/heavyrain-php/rayleigh/issues",
-    "source": "https://github.com/heavyrain-php/rayleigh/"
+    "docs": "https://shibare-framework.github.io/",
+    "issues": "https://github.com/shibare-framework/framework/issues",
+    "source": "https://github.com/shibare-framework/framework/"
   },
   "provide": {},
   "require": {
@@ -33,7 +33,7 @@
   "suggest": {},
   "autoload": {
     "psr-4": {
-      "Rayleigh\\Contracts\\": ""
+      "Shibare\\Contracts\\": ""
     },
     "files": [
       "functions.php"

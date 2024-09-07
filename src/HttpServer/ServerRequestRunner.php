@@ -7,7 +7,7 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Rayleigh\HttpServer;
+namespace Shibare\HttpServer;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -16,7 +16,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 /**
  * PSR-15 ServerRequest runner Last In First Out middlewares
- * @package Rayleigh\HttpServer
+ * @package Shibare\HttpServer
  * @link https://github.com/httpsoft/http-runner/
  * @link https://github.com/relayphp/Relay.Relay/
  * @link https://github.com/slimphp/Slim/blob/4.x/Slim/MiddlewareDispatcher.php

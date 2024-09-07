@@ -7,7 +7,7 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Rayleigh\HttpMessage;
+namespace Shibare\HttpMessage;
 
 /**
  * PSR-7 Message about Protocol Version like HTTP/1.1

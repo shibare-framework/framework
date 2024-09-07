@@ -7,17 +7,17 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Rayleigh\HttpServer;
+namespace Shibare\HttpServer;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Rayleigh\HttpMessage\UriPlaceholderResolver;
+use Shibare\HttpMessage\UriPlaceholderResolver;
 
 /**
  * PSR-15 Routing handler
- * @package Rayleigh\HttpServer
+ * @package Shibare\HttpServer
  */
 final /* readonly */ class RoutingHandler implements RequestHandlerInterface
 {

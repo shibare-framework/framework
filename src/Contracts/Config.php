@@ -7,11 +7,11 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Rayleigh\Contracts;
+namespace Shibare\Contracts;
 
 /**
  * Config interface
- * @package Rayleigh\Contracts
+ * @package Shibare\Contracts
  */
 interface Config
 {

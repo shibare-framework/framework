@@ -7,7 +7,7 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Rayleigh\HttpMessage;
+namespace Shibare\HttpMessage;
 
 use Psr\Http\Message\MessageInterface;
 

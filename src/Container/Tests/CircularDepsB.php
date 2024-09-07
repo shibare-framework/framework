@@ -7,7 +7,7 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Rayleigh\Container\Tests;
+namespace Shibare\Container\Tests;
 
 final class CircularDepsB
 {

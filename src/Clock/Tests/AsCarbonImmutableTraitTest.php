@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 /**
  * Class AsCarbonImmutableTraitTest
- * @package Rayleigh\Clock
+ * @package Shibare\Clock
  * @author Masaru Yamagishi <akai_inu@live.jp>
  * @license Apache-2.0
  */
 
-namespace Rayleigh\Clock\Tests;
+namespace Shibare\Clock\Tests;
 
 use Carbon\CarbonImmutable;
 use DateTimeImmutable;
@@ -17,7 +17,7 @@ use PHPUnit\Framework\Attributes\CoversTrait;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Psr\Clock\ClockInterface;
-use Rayleigh\Clock\AsCarbonImmutableTrait;
+use Shibare\Clock\AsCarbonImmutableTrait;
 
 #[CoversTrait(AsCarbonImmutableTrait::class)]
 final class AsCarbonImmutableTraitTest extends TestCase

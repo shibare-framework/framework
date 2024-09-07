@@ -7,21 +7,21 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Rayleigh\HttpServer;
+namespace Shibare\HttpServer;
 
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Log\LoggerInterface;
-use Rayleigh\HttpFactory\ServerRequestFactory;
-use Rayleigh\HttpFactory\StreamFactory;
-use Rayleigh\HttpFactory\UploadedFileFactory;
-use Rayleigh\HttpMessage\Response;
+use Shibare\HttpFactory\ServerRequestFactory;
+use Shibare\HttpFactory\StreamFactory;
+use Shibare\HttpFactory\UploadedFileFactory;
+use Shibare\HttpMessage\Response;
 use Spiral\RoadRunner\Http\PSR7Worker;
 use Spiral\RoadRunner\Worker;
 
 /**
  * RoadRunner HTTP Dispatcher
- * @package Rayleigh\HttpServer
+ * @package Shibare\HttpServer
  * @link https://docs.roadrunner.dev/docs/php-worker/worker
  * @codeCoverageIgnore
  */

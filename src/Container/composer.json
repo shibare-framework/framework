@@ -1,15 +1,15 @@
 {
   "$schema": "https://getcomposer.org/schema.json",
-  "name": "rayleigh/container",
-  "description": "S.S.S. Rayleigh Framework - Container Component",
+  "name": "shibare/container",
+  "description": "S.S.S. Shibare Framework - Container Component",
   "type": "library",
   "keywords": [
-    "rayleigh",
+    "shibare",
     "container",
     "dic",
     "psr11"
   ],
-  "homepage": "https://heavyrain-php.github.io/rayleigh/",
+  "homepage": "https://shibare-framework.github.io/",
   "readme": "README.md",
   "license": "Apache-2.0",
   "authors": [
@@ -21,9 +21,9 @@
     }
   ],
   "support": {
-    "docs": "https://heavyrain-php.github.io/rayleigh/",
-    "issues": "https://github.com/heavyrain-php/rayleigh/issues",
-    "source": "https://github.com/heavyrain-php/rayleigh/"
+    "docs": "https://shibare-framework.github.io/",
+    "issues": "https://github.com/shibare-framework/framework/issues",
+    "source": "https://github.com/shibare-framework/framework/"
   },
   "provide": {
     "psr/container-implementation": "2.0.2"
@@ -36,7 +36,7 @@
   "suggest": {},
   "autoload": {
     "psr-4": {
-      "Rayleigh\\Container\\": ""
+      "Shibare\\Container\\": ""
     },
     "exclude-from-classmap": [
       "Tests/"

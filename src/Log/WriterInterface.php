@@ -7,11 +7,11 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Rayleigh\Log;
+namespace Shibare\Log;
 
 /**
  * Write log message to anywhere
- * @package Rayleigh\Log
+ * @package Shibare\Log
  */
 interface WriterInterface
 {

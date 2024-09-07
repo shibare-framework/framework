@@ -1,14 +1,14 @@
 {
   "$schema": "https://getcomposer.org/schema.json",
-  "name": "rayleigh/http-message",
-  "description": "S.S.S. Rayleigh Framework - HTTP Message Component",
+  "name": "shibare/http-message",
+  "description": "S.S.S. Shibare Framework - HTTP Message Component",
   "type": "library",
   "keywords": [
-    "rayleigh",
+    "shibare",
     "http",
     "psr7"
   ],
-  "homepage": "https://heavyrain-php.github.io/rayleigh/",
+  "homepage": "https://shibare-framework.github.io/",
   "readme": "README.md",
   "license": "Apache-2.0",
   "authors": [
@@ -20,9 +20,9 @@
     }
   ],
   "support": {
-    "docs": "https://heavyrain-php.github.io/rayleigh/",
-    "issues": "https://github.com/heavyrain-php/rayleigh/issues",
-    "source": "https://github.com/heavyrain-php/rayleigh/"
+    "docs": "https://shibare-framework.github.io/",
+    "issues": "https://github.com/shibare-framework/framework/issues",
+    "source": "https://github.com/shibare-framework/framework/"
   },
   "provide": {
     "psr/http-message-implementation": "2.0"
@@ -35,7 +35,7 @@
   "suggest": {},
   "autoload": {
     "psr-4": {
-      "Rayleigh\\HttpMessage\\": ""
+      "Shibare\\HttpMessage\\": ""
     },
     "exclude-from-classmap": [
       "Tests/"

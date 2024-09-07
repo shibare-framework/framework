@@ -7,24 +7,24 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Rayleigh\Log\Writers;
+namespace Shibare\Log\Writers;
 
-use Rayleigh\Log\Rfc5424LogLevel;
-use Rayleigh\Log\WriterInterface;
+use Shibare\Log\Rfc5424LogLevel;
+use Shibare\Log\WriterInterface;
 use Monolog\Level;
 use Monolog\Logger;
 
 /**
  * Class MonologWriter
  * Use monolog/monolog as writer
- * @package Rayleigh\Log\Writers
+ * @package Shibare\Log\Writers
  * @see https://github.com/Seldaek/monolog/
  *
  * ```php
  * $logger = new \Monolog\Logger('appname');
  * $logger->pushHandler(new \Monolog\Handler\StreamHandler('php://stdout'));
- * $writer = new \Rayleigh\Log\Writers\MonologWriter($logger);
- * $logger = new \Rayleigh\Log\Logger([$writer]);
+ * $writer = new \Shibare\Log\Writers\MonologWriter($logger);
+ * $logger = new \Shibare\Log\Logger([$writer]);
  * $logger->info('Hello');
  * ```
  */

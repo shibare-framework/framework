@@ -7,17 +7,17 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Rayleigh\Log\Tests\Writers;
+namespace Shibare\Log\Tests\Writers;
 
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Rayleigh\Log\FormatterInterface;
-use Rayleigh\Log\Writers\StdoutWriter;
+use Shibare\Log\FormatterInterface;
+use Shibare\Log\Writers\StdoutWriter;
 
 /**
  * Class StdoutWriterTest
- * @package Rayleigh\Log\Tests\Writers
+ * @package Shibare\Log\Tests\Writers
  */
 #[CoversClass(StdoutWriter::class)]
 final class StdoutWriterTest extends TestCase

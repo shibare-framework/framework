@@ -7,18 +7,18 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Rayleigh\Log\Tests\Writers;
+namespace Shibare\Log\Tests\Writers;
 
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Rayleigh\Log\FormatterInterface;
-use Rayleigh\Log\Rfc5424LogLevel;
-use Rayleigh\Log\Writers\StreamWriter;
+use Shibare\Log\FormatterInterface;
+use Shibare\Log\Rfc5424LogLevel;
+use Shibare\Log\Writers\StreamWriter;
 
 /**
  * Class StreamWriterTest
- * @package Rayleigh\Log\Tests\Writers
+ * @package Shibare\Log\Tests\Writers
  */
 #[CoversClass(StreamWriter::class)]
 final class StreamWriterTest extends TestCase

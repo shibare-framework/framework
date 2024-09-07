@@ -1,11 +1,11 @@
-# S.S.S. Framework Rayleigh - Clock Component
+# S.S.S. Framework Shibare - Clock Component
 
 [PSR-20: Clock](https://www.php-fig.org/psr/psr-20/) Implementation.
 
 ## Usage
 
 ```sh
-$ composer require rayleigh/clock
+$ composer require shibare/clock
 ```
 
 ```php
@@ -14,7 +14,7 @@ $ composer require rayleigh/clock
 require_once 'vendor/autoload.php';
 
 // Get current system clock
-var_dump((new \Rayleigh\Clock\SystemClock())->now());
+var_dump((new \Shibare\Clock\SystemClock())->now());
 object(DateTimeImmutable)#4 (3) {
   ["date"]=>
   string(26) "2024-07-28 13:27:54.274642"
@@ -25,9 +25,9 @@ object(DateTimeImmutable)#4 (3) {
 }
 
 // Fix time(for instance: Request-time on before-http-middleware)
-\Rayleigh\Clock\GlobalClock::setGlobalClock(new \Rayleigh\Clock\SystemClock());
+\Shibare\Clock\GlobalClock::setGlobalClock(new \Shibare\Clock\SystemClock());
 sleep(1);
-var_dump(\Rayleigh\Clock\global_now());
+var_dump(\Shibare\Clock\global_now());
 object(DateTimeImmutable)#4 (3) {
   ["date"]=>
   string(26) "2024-07-28 13:27:54.274642"

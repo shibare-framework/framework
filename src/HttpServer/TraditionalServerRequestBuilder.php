@@ -7,17 +7,17 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Rayleigh\HttpServer;
+namespace Shibare\HttpServer;
 
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\UploadedFileInterface;
-use Rayleigh\HttpMessage\ServerRequest;
-use Rayleigh\HttpMessage\UploadedFile;
+use Shibare\HttpMessage\ServerRequest;
+use Shibare\HttpMessage\UploadedFile;
 use RuntimeException;
 
 /**
  * PSR-7 ServerRequest builds from global variables
- * @package Rayleigh\HttpServer
+ * @package Shibare\HttpServer
  * @link https://github.com/laminas/laminas-diactoros/blob/3.4.x/src/ServerRequestFactory.php
  * @example
  * ```php

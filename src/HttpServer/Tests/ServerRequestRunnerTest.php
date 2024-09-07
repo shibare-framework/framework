@@ -7,7 +7,7 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Rayleigh\HttpServer\Tests;
+namespace Shibare\HttpServer\Tests;
 
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
@@ -16,11 +16,11 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Rayleigh\HttpServer\ServerRequestRunner;
+use Shibare\HttpServer\ServerRequestRunner;
 
 /**
  * Class ServerRequestRunnerTest
- * @package Rayleigh\HttpServer\Tests
+ * @package Shibare\HttpServer\Tests
  */
 #[CoversClass(ServerRequestRunner::class)]
 final class ServerRequestRunnerTest extends TestCase

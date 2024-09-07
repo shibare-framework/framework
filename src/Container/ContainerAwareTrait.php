@@ -7,13 +7,13 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Rayleigh\Container;
+namespace Shibare\Container;
 
 use Psr\Container\ContainerInterface;
 
 /**
  * Container Aware Trait
- * @package Rayleigh\Container
+ * @package Shibare\Container
  * @phpstan-require-implements ContainerAwareInterface
  */
 trait ContainerAwareTrait

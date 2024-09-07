@@ -7,13 +7,13 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Rayleigh\HttpMessage;
+namespace Shibare\HttpMessage;
 
 use Psr\Http\Message\MessageInterface;
 
 /**
  * PSR-7 Message implementation abstraction
- * @package Rayleigh\HttpMessage
+ * @package Shibare\HttpMessage
  */
 abstract class Message implements MessageInterface
 {

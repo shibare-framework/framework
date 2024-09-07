@@ -7,13 +7,13 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Rayleigh\Console\Output;
+namespace Shibare\Console\Output;
 
-use Rayleigh\Console\OutputInterface;
+use Shibare\Console\OutputInterface;
 
 /**
  * Console ArrayOutput
- * @package Rayleigh\Console
+ * @package Shibare\Console
  */
 final class ArrayOutput implements OutputInterface
 {

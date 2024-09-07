@@ -1,15 +1,15 @@
 {
   "$schema": "https://getcomposer.org/schema.json",
-  "name": "rayleigh/idl-openapi",
-  "description": "S.S.S. Rayleigh Framework - IDL OpenAPI Component",
+  "name": "shibare/idl-openapi",
+  "description": "S.S.S. Shibare Framework - IDL OpenAPI Component",
   "type": "library",
   "keywords": [
-    "rayleigh",
+    "shibare",
     "idl",
     "openapi",
     "swagger"
   ],
-  "homepage": "https://heavyrain-php.github.io/rayleigh/",
+  "homepage": "https://shibare-framework.github.io/",
   "readme": "README.md",
   "license": "Apache-2.0",
   "authors": [
@@ -21,9 +21,9 @@
     }
   ],
   "support": {
-    "docs": "https://heavyrain-php.github.io/rayleigh/",
-    "issues": "https://github.com/heavyrain-php/rayleigh/issues",
-    "source": "https://github.com/heavyrain-php/rayleigh/"
+    "docs": "https://shibare-framework.github.io/",
+    "issues": "https://github.com/shibare-framework/framework/issues",
+    "source": "https://github.com/shibare-framework/framework/"
   },
   "require": {
     "php": "~8.2.0|~8.3.0"
@@ -32,7 +32,7 @@
   "suggest": {},
   "autoload": {
     "psr-4": {
-      "Rayleigh\\IdlOpenApi\\": ""
+      "Shibare\\IdlOpenApi\\": ""
     },
     "exclude-from-classmap": [
       "*Test.php"

@@ -7,20 +7,20 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Rayleigh\Console;
+namespace Shibare\Console;
 
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
-use Rayleigh\Console\Commands\ListCommand;
-use Rayleigh\Console\Input\ArgvInput;
-use Rayleigh\Console\Output\ArrayOutput;
-use Rayleigh\Container\ContainerAwareInterface;
-use Rayleigh\Container\ContainerAwareTrait;
+use Shibare\Console\Commands\ListCommand;
+use Shibare\Console\Input\ArgvInput;
+use Shibare\Console\Output\ArrayOutput;
+use Shibare\Container\ContainerAwareInterface;
+use Shibare\Container\ContainerAwareTrait;
 use ReflectionClass;
 
 /**
  * Console Kernel
- * @package Rayleigh\Console
+ * @package Shibare\Console
  * @link https://github.com/symfony/symfony/blob/7.2/src/Symfony/Component/Console/Application.php
  * example:
  * ```php

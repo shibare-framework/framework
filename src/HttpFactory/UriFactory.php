@@ -7,15 +7,15 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Rayleigh\HttpFactory;
+namespace Shibare\HttpFactory;
 
 use Psr\Http\Message\UriFactoryInterface;
 use Psr\Http\Message\UriInterface;
-use Rayleigh\HttpMessage\Uri;
+use Shibare\HttpMessage\Uri;
 
 /**
  * PSR-17 Uri factory implementation
- * @package Rayleigh\HttpFactory
+ * @package Shibare\HttpFactory
  */
 final /* readonly */ class UriFactory implements UriFactoryInterface
 {

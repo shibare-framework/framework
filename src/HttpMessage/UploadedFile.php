@@ -7,7 +7,7 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Rayleigh\HttpMessage;
+namespace Shibare\HttpMessage;
 
 use InvalidArgumentException;
 use Psr\Http\Message\StreamInterface;
@@ -16,7 +16,7 @@ use RuntimeException;
 
 /**
  * PSR-7 UploadedFile implementation
- * @package Rayleigh\HttpMessage
+ * @package Shibare\HttpMessage
  */
 class UploadedFile implements UploadedFileInterface
 {

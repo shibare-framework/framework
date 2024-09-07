@@ -1,14 +1,14 @@
 {
   "$schema": "https://getcomposer.org/schema.json",
-  "name": "rayleigh/http-server",
-  "description": "S.S.S. Rayleigh Framework - HTTP Server Component",
+  "name": "shibare/http-server",
+  "description": "S.S.S. Shibare Framework - HTTP Server Component",
   "type": "library",
   "keywords": [
-    "rayleigh",
+    "shibare",
     "http",
     "psr15"
   ],
-  "homepage": "https://heavyrain-php.github.io/rayleigh/",
+  "homepage": "https://shibare-framework.github.io/",
   "readme": "README.md",
   "license": "Apache-2.0",
   "authors": [
@@ -20,9 +20,9 @@
     }
   ],
   "support": {
-    "docs": "https://heavyrain-php.github.io/rayleigh/",
-    "issues": "https://github.com/heavyrain-php/rayleigh/issues",
-    "source": "https://github.com/heavyrain-php/rayleigh/"
+    "docs": "https://shibare-framework.github.io/",
+    "issues": "https://github.com/shibare-framework/framework/issues",
+    "source": "https://github.com/shibare-framework/framework/"
   },
   "provide": {
     "psr/http-server-handler-implementation": "1.0.2",
@@ -35,8 +35,8 @@
     "psr/http-server-handler": "^1.0.0",
     "psr/http-server-middleware": "^1.0.0",
     "psr/log": "^2.0.0|^3.0.0",
-    "rayleigh/http-factory": "^0.0.1",
-    "rayleigh/http-message": "^0.0.1"
+    "shibare/http-factory": "^0.0.1",
+    "shibare/http-message": "^0.0.1"
   },
   "require-dev": {
     "spiral/roadrunner-http": "^3.5.0"
@@ -47,7 +47,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Rayleigh\\HttpServer\\": ""
+      "Shibare\\HttpServer\\": ""
     },
     "exclude-from-classmap": [
       "*Test.php"

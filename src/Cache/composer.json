@@ -1,15 +1,15 @@
 {
   "$schema": "https://getcomposer.org/schema.json",
-  "name": "rayleigh/cache",
-  "description": "S.S.S. Rayleigh Framework - Cache Component",
+  "name": "shibare/cache",
+  "description": "S.S.S. Shibare Framework - Cache Component",
   "type": "library",
   "keywords": [
-    "rayleigh",
+    "shibare",
     "cache",
     "psr6",
     "psr16"
   ],
-  "homepage": "https://heavyrain-php.github.io/rayleigh/",
+  "homepage": "https://shibare-framework.github.io/",
   "readme": "README.md",
   "license": "Apache-2.0",
   "authors": [
@@ -21,9 +21,9 @@
     }
   ],
   "support": {
-    "docs": "https://heavyrain-php.github.io/rayleigh/",
-    "issues": "https://github.com/heavyrain-php/rayleigh/issues",
-    "source": "https://github.com/heavyrain-php/rayleigh/"
+    "docs": "https://shibare-framework.github.io/",
+    "issues": "https://github.com/shibare-framework/framework/issues",
+    "source": "https://github.com/shibare-framework/framework/"
   },
   "provide": {
     "psr/cache-implementation": "3.0.0",
@@ -40,7 +40,7 @@
   "suggest": {},
   "autoload": {
     "psr-4": {
-      "Rayleigh\\Cache\\": ""
+      "Shibare\\Cache\\": ""
     },
     "exclude-from-classmap": [
       "Tests/"

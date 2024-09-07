@@ -7,13 +7,13 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Rayleigh\Log;
+namespace Shibare\Log;
 
 use Psr\Log\LogLevel;
 
 /**
  * RFC 5424 Syslog Message Severities
- * @package Rayleigh\Log
+ * @package Shibare\Log
  * @see https://datatracker.ietf.org/doc/html/rfc5424#section-6.2.1
  * @see https://github.com/php-fig/log/blob/master/src/LogLevel.php
  * @see https://github.com/Seldaek/monolog/blob/main/src/Monolog/Level.php

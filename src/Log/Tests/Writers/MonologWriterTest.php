@@ -7,17 +7,17 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Rayleigh\Log\Tests\Writers;
+namespace Shibare\Log\Tests\Writers;
 
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Rayleigh\Log\Rfc5424LogLevel;
-use Rayleigh\Log\Writers\MonologWriter;
+use Shibare\Log\Rfc5424LogLevel;
+use Shibare\Log\Writers\MonologWriter;
 
 /**
  * Class MonologWriterTest
- * @package Rayleigh\Log\Tests\Writers
+ * @package Shibare\Log\Tests\Writers
  */
 #[CoversClass(MonologWriter::class)]
 final class MonologWriterTest extends TestCase

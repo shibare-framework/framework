@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 /**
  * Class AsChronosTrait
- * @package Rayleigh\Clock
+ * @package Shibare\Clock
  * @author Masaru Yamagishi <akai_inu@live.jp>
  * @license Apache-2.0
  */
 
-namespace Rayleigh\Clock;
+namespace Shibare\Clock;
 
 use Cake\Chronos\Chronos;
 use RuntimeException;

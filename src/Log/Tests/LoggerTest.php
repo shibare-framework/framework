@@ -7,19 +7,19 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Rayleigh\Log\Tests;
+namespace Shibare\Log\Tests;
 
 use PHPUnit\Framework\Attributes\After;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Rayleigh\Log\Logger;
-use Rayleigh\Log\Rfc5424LogLevel;
-use Rayleigh\Log\WriterInterface;
+use Shibare\Log\Logger;
+use Shibare\Log\Rfc5424LogLevel;
+use Shibare\Log\WriterInterface;
 
 /**
  * Class LoggerTest
- * @package Rayleigh\Log\Tests
+ * @package Shibare\Log\Tests
  */
 #[CoversClass(Logger::class)]
 #[CoversClass(Rfc5424LogLevel::class)]

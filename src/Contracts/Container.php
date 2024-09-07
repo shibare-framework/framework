@@ -7,13 +7,13 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Rayleigh\Contracts;
+namespace Shibare\Contracts;
 
 use Psr\Container\ContainerInterface;
 
 /**
  * Container interface
- * @package Rayleigh\Contracts
+ * @package Shibare\Contracts
  */
 interface Container extends ContainerInterface
 {

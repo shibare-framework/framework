@@ -7,13 +7,13 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Rayleigh\HttpServer;
+namespace Shibare\HttpServer;
 
 use Stringable;
 
 /**
  * Header and body emitter function wrapper
- * @package Rayleigh\HttpServer
+ * @package Shibare\HttpServer
  * @codeCoverageIgnore because all of methods are wrapper of PHP built-in functions
  */
 /* final readonly */ class Emitter

@@ -7,15 +7,15 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Rayleigh\Log\Writers;
+namespace Shibare\Log\Writers;
 
-use Rayleigh\Log\FormatterInterface;
-use Rayleigh\Log\Rfc5424LogLevel;
-use Rayleigh\Log\WriterInterface;
+use Shibare\Log\FormatterInterface;
+use Shibare\Log\Rfc5424LogLevel;
+use Shibare\Log\WriterInterface;
 
 /**
  * resource writer
- * @package Rayleigh\Log\Writers
+ * @package Shibare\Log\Writers
  */
 class StreamWriter implements WriterInterface
 {

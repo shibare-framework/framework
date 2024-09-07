@@ -1,39 +1,40 @@
 {
   "$schema": "https://getcomposer.org/schema.json",
-  "name": "rayleigh/framework",
-  "description": "Simple, Short, Smart framework - Rayleigh",
+  "name": "shibare/framework",
+  "description": "Shibare, Simple, Short, Smart framework",
   "type": "library",
   "keywords": [
+    "shibare",
     "framework",
     "http",
     "server"
   ],
-  "homepage": "https://heavyrain-php.github.io/rayleigh/",
+  "homepage": "https://shibare-framework.github.io/",
   "readme": "README.md",
   "license": "Apache-2.0",
   "autoload": {
     "psr-4": {
-      "Rayleigh\\": "src/"
+      "Shibare\\": "src/"
     },
     "exclude-from-classmap": [
       "*/Tests/"
     ]
   },
   "replace": {
-    "rayleigh/cache": "self.version",
-    "rayleigh/clock": "self.version",
-    "rayleigh/config": "self.version",
-    "rayleigh/console": "self.version",
-    "rayleigh/container": "self.version",
-    "rayleigh/contracts": "self.version",
-    "rayleigh/database": "self.version",
-    "rayleigh/event-dispatcher": "self.version",
-    "rayleigh/http-client": "self.version",
-    "rayleigh/http-factory": "self.version",
-    "rayleigh/http-message": "self.version",
-    "rayleigh/http-server": "self.version",
-    "rayleigh/idl-openapi": "self.version",
-    "rayleigh/log": "self.version"
+    "shibare/cache": "self.version",
+    "shibare/clock": "self.version",
+    "shibare/config": "self.version",
+    "shibare/console": "self.version",
+    "shibare/container": "self.version",
+    "shibare/contracts": "self.version",
+    "shibare/database": "self.version",
+    "shibare/event-dispatcher": "self.version",
+    "shibare/http-client": "self.version",
+    "shibare/http-factory": "self.version",
+    "shibare/http-message": "self.version",
+    "shibare/http-server": "self.version",
+    "shibare/idl-openapi": "self.version",
+    "shibare/log": "self.version"
   },
   "authors": [
     {
@@ -42,9 +43,9 @@
     }
   ],
   "support": {
-    "docs": "https://heavyrain-php.github.io/rayleigh/",
-    "issues": "https://github.com/heavyrain-php/rayleigh/issues",
-    "source": "https://github.com/heavyrain-php/rayleigh/"
+    "docs": "https://shibare-framework.github.io/",
+    "issues": "https://github.com/shibare-framework/framework/issues",
+    "source": "https://github.com/shibare-framework/framework/"
   },
   "require": {
     "php": "~8.2.0|~8.3.0",

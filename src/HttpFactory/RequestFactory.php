@@ -7,15 +7,15 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Rayleigh\HttpFactory;
+namespace Shibare\HttpFactory;
 
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
-use Rayleigh\HttpMessage\Request;
+use Shibare\HttpMessage\Request;
 
 /**
  * PSR-17 Request factory implementation
- * @package Rayleigh\HttpFactory
+ * @package Shibare\HttpFactory
  */
 final /* readonly */ class RequestFactory implements RequestFactoryInterface
 {

@@ -7,14 +7,14 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Rayleigh\Log\Formatters;
+namespace Shibare\Log\Formatters;
 
-use Rayleigh\Log\FormatterInterface;
-use Rayleigh\Log\Rfc5424LogLevel;
+use Shibare\Log\FormatterInterface;
+use Shibare\Log\Rfc5424LogLevel;
 
 /**
  * JSON-Line formatter
- * @package Rayleigh\Log\Formatters
+ * @package Shibare\Log\Formatters
  */
 class JsonLineFormatter implements FormatterInterface
 {

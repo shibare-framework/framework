@@ -7,13 +7,13 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Rayleigh\Console\Input;
+namespace Shibare\Console\Input;
 
-use Rayleigh\Console\InputInterface;
+use Shibare\Console\InputInterface;
 
 /**
  * Console ArrayInput
- * @package Rayleigh\Console
+ * @package Shibare\Console
  * example:
  * ```php
  * $input = new ArrayInput([

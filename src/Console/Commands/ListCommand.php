@@ -7,15 +7,15 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Rayleigh\Console\Commands;
+namespace Shibare\Console\Commands;
 
-use Rayleigh\Console\CommandInterface;
-use Rayleigh\Console\InputInterface;
-use Rayleigh\Console\OutputInterface;
+use Shibare\Console\CommandInterface;
+use Shibare\Console\InputInterface;
+use Shibare\Console\OutputInterface;
 
 /**
  * Console ListCommand
- * @package Rayleigh\Console\Commands
+ * @package Shibare\Console\Commands
  */
 final class ListCommand implements CommandInterface
 {

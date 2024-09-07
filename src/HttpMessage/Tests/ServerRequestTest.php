@@ -7,26 +7,26 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Rayleigh\HttpMessage\Tests;
+namespace Shibare\HttpMessage\Tests;
 
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\CoversTrait;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\UploadedFileInterface;
-use Rayleigh\HttpMessage\HasAttributes;
-use Rayleigh\HttpMessage\HeaderBag;
-use Rayleigh\HttpMessage\HasParams;
-use Rayleigh\HttpMessage\HasParsedBody;
-use Rayleigh\HttpMessage\HasUploadedFiles;
-use Rayleigh\HttpMessage\Internal\UriPartsParser;
-use Rayleigh\HttpMessage\ServerRequest;
-use Rayleigh\HttpMessage\Stream;
-use Rayleigh\HttpMessage\Uri;
+use Shibare\HttpMessage\HasAttributes;
+use Shibare\HttpMessage\HeaderBag;
+use Shibare\HttpMessage\HasParams;
+use Shibare\HttpMessage\HasParsedBody;
+use Shibare\HttpMessage\HasUploadedFiles;
+use Shibare\HttpMessage\Internal\UriPartsParser;
+use Shibare\HttpMessage\ServerRequest;
+use Shibare\HttpMessage\Stream;
+use Shibare\HttpMessage\Uri;
 
 /**
  * Class RequestTest
- * @package Rayleigh\HttpMessage\Tests
+ * @package Shibare\HttpMessage\Tests
  */
 #[CoversClass(HeaderBag::class)]
 #[CoversClass(ServerRequest::class)]
