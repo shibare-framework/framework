@@ -65,8 +65,12 @@
   "require-dev": {
     "ext-pdo_mysql": "*",
     "cakephp/chronos": "^3.0.0",
+    "mockery/mockery": "^1.6",
     "monolog/monolog": "^3.7.0",
     "nesbot/carbon": "^3.0.0",
+    "phpstan/extension-installer": "^1.4",
+    "phpstan/phpstan": "^1.12",
+    "phpstan/phpstan-mockery": "^1.1",
     "phpunit/phpunit": "^11.2.9",
     "spiral/roadrunner-http": "^3.5.0"
   },
@@ -93,7 +97,7 @@
   },
   "scripts": {
     "lint": [
-      "./tools/phpstan analyse src",
+      "./vendor/bin/phpstan analyse src",
       "./tools/psalm",
       "./tools/php-cs-fixer check"
     ],
@@ -107,6 +111,9 @@
   "config": {
     "optimize-autoloader": true,
     "preferred-install": "dist",
-    "sort-packages": true
+    "sort-packages": true,
+    "allow-plugins": {
+      "phpstan/extension-installer": true
+    }
   }
 }
