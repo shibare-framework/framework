@@ -29,10 +29,12 @@
     "ext-pdo": "*"
   },
   "require-dev": {
-    "ext-pdo_mysql": "*"
+    "ext-pdo_mysql": "*",
+    "ext-pdo_sqlite": "*"
   },
   "suggest": {
-    "ext-pdo_mysql": "Need to use MySQL"
+    "ext-pdo_mysql": "Need to use MySQL",
+    "ext-pdo_sqlite": "Need to use sqlite"
   },
   "autoload": {
     "psr-4": {
