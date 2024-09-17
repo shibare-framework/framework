@@ -16,6 +16,7 @@ use ReflectionIntersectionType;
 use ReflectionNamedType;
 use ReflectionParameter;
 use ReflectionUnionType;
+use Shibare\Contracts\HttpServer\ServerRequestAwareInterface;
 
 /**
  * @template T of object
@@ -68,7 +69,12 @@ class InputGenerator
             $args[$name] = $value;
         }
 
-        return $ref_class->newInstanceArgs($args);
+        $input = $ref_class->newInstanceArgs($args);
+
+        if ($input instanceof ServerRequestAwareInterface) {
+            $input->setServerRequest($request);
+        }
+        return $input;
     }
 
     /**

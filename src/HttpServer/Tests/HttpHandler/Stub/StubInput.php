@@ -8,8 +8,13 @@ declare(strict_types=1);
 
 namespace Shibare\HttpServer\Tests\HttpHandler\Stub;
 
-final class StubInput
+use Shibare\Contracts\HttpServer\ServerRequestAwareInterface;
+use Shibare\HttpServer\HttpHandler\ServerRequestAwareTrait;
+
+final class StubInput implements ServerRequestAwareInterface
 {
+    use ServerRequestAwareTrait;
+
     /**
      * @param string $name
      * @param int $age

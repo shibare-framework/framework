@@ -17,15 +17,18 @@ use Shibare\HttpServer\Tests\HttpHandler\Stub\StubInput6;
 use Shibare\HttpServer\Tests\HttpHandler\Stub\StubInput7;
 use Shibare\HttpServer\Tests\HttpHandler\Stub\StubInput8;
 use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\CoversTrait;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use Psr\Http\Message\ServerRequestInterface;
 use Shibare\HttpServer\HttpHandler\InputGenerator;
 use Shibare\HttpServer\HttpHandler\InputParameterValidationException;
 use Shibare\HttpServer\HttpHandler\InvalidHandlerDefinitionException;
+use Shibare\HttpServer\HttpHandler\ServerRequestAwareTrait;
 use Shibare\HttpServer\Tests\TestCase;
 
 #[CoversClass(InputGenerator::class)]
+#[CoversTrait(ServerRequestAwareTrait::class)]
 final class InputGeneratorTest extends TestCase
 {
     #[Test]
@@ -71,6 +74,7 @@ final class InputGeneratorTest extends TestCase
         self::assertSame('University', $actual->school);
         self::assertSame(['reading', 'programming'], $actual->hobbies);
         self::assertNull($actual->extra);
+        self::assertInstanceOf(ServerRequestInterface::class, $actual->getServerRequest());
     }
 
     #[Test]
