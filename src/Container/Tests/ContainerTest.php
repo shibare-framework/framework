@@ -9,22 +9,26 @@ declare(strict_types=1);
 
 namespace Shibare\Container\Tests;
 
+use PHPUnit\Framework\Attributes\After;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use Shibare\Container\ClassResolver;
+use Shibare\Container\ClassResolverResult;
 use Shibare\Container\Container;
 
 #[UsesClass(ClassResolver::class)]
+#[UsesClass(ClassResolverResult::class)]
 #[CoversClass(Container::class)]
 final class ContainerTest extends TestCase
 {
     /** @var resource|null $resource */
     private $resource = null;
 
-    protected function tearDown(): void
+    #[After]
+    protected function closeResource(): void
     {
         if ($this->resource !== null) {
             \fclose($this->resource);
@@ -76,7 +80,6 @@ final class ContainerTest extends TestCase
 
         // Concrete object
         $container->bind('concrete object', $a = new \stdClass());
-        /** @phpstan-ignore-next-line */
         self::assertSame($a, $container->get('concrete object'));
         self::assertTrue($container->has('concrete object'));
         self::assertFalse($container->has('non-existing id'));
@@ -89,14 +92,12 @@ final class ContainerTest extends TestCase
             }
         });
         /** @var callable $callable */
-        /** @phpstan-ignore-next-line */
         $callable = $container->get('callable instance');
         self::assertSame('world', $callable());
 
         // Callable
         $container->bind('callable', fn() => 'hello');
         /** @var callable $callable2 */
-        /** @phpstan-ignore-next-line */
         $callable2 = $container->get('callable');
         self::assertSame('hello', $callable2());
 
@@ -115,12 +116,6 @@ final class ContainerTest extends TestCase
         // $container->bind(ClassResolver::class, ClassResolver::class);
         $instance = $container->get(ClassResolver::class);
         self::assertInstanceOf(ClassResolver::class, $instance);
-
-        // Scalar
-        $container->bind('scalar', 4);
-        /** @phpstan-ignore-next-line */
-        $scalar = $container->get('scalar');
-        self::assertSame(4, $scalar);
     }
 
     #[Test]
@@ -130,7 +125,6 @@ final class ContainerTest extends TestCase
 
         $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage('id is not registered to container');
-        /** @phpstan-ignore-next-line */
         $container->get('id');
     }
 

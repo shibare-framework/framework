@@ -6,7 +6,7 @@ declare(strict_types=1);
  * @license MIT
  */
 
-namespace Shibare\HttpServer\Middlewares;
+namespace Shibare\HttpServer\Tests\Middlewares;
 
 use Mockery\MockInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
@@ -17,6 +17,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use Shibare\HttpServer\Middlewares\JsonRequestResponseMiddleware;
 use Shibare\HttpServer\Tests\TestCase;
 
 #[CoversClass(JsonRequestResponseMiddleware::class)]

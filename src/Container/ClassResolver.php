@@ -12,7 +12,11 @@ namespace Shibare\Container;
 use Psr\Container\ContainerInterface;
 use ReflectionClass;
 use ReflectionException;
+use ReflectionIntersectionType;
+use ReflectionNamedType;
 use ReflectionParameter;
+use ReflectionUnionType;
+use Throwable;
 
 /**
  * Class resolver from class-name
@@ -35,47 +39,132 @@ final class ClassResolver
     ) {}
 
     /**
+     * Tries to resolve a class name to an object. No exception is thrown.
+     * @template T of object
+     * @param class-string<T> $resolver
+     * @return ClassResolverResult<T>
+     */
+    public function tryResolve(string $resolver): ClassResolverResult
+    {
+        try {
+            if (!\class_exists($resolver)) {
+                return ClassResolverResult::failed(
+                    new ReflectionException(\sprintf('class "%s" is not found', $resolver)),
+                );
+            }
+            $ref = new ReflectionClass($resolver);
+
+            if (!$ref->isInstantiable()) {
+                return ClassResolverResult::failed(
+                    new ReflectionException(\sprintf('class "%s" is not instantiable', $resolver)),
+                );
+            }
+
+            $constructor = $ref->getConstructor();
+            if (\is_null($constructor) || $constructor->getNumberOfParameters() === 0) {
+                // No constructor or no parameters
+                /** @var ClassResolverResult<T> $result */
+                $result = ClassResolverResult::resolved($ref->newInstance());
+                return $result;
+            }
+
+            if (\array_key_exists($resolver, $this->resolving_concretes)) {
+                // Circular dependency detected
+                return ClassResolverResult::failed(
+                    new ReflectionException(\sprintf('circular dependency detected on "%s"', $resolver)),
+                );
+            }
+            $this->resolving_concretes[$resolver] = true;
+
+            $resolved_params = [];
+            foreach ($constructor->getParameters() as $param) {
+                $p = $this->tryResolveParameter($param);
+                if (!$p->isResolved()) {
+                    /** @var ClassResolverResult<never> */
+                    return $p;
+                }
+                $resolved_params[] = $p->getInstance();
+            }
+
+            $instance = $ref->newInstanceArgs($resolved_params);
+            \assert($instance instanceof $resolver);
+
+            /** @var ClassResolverResult<T> $result */
+            $result = ClassResolverResult::resolved($instance);
+
+            return $result;
+        } catch (Throwable $e) {
+            return ClassResolverResult::failed($e);
+        } finally {
+            unset($this->resolving_concretes[$resolver]);
+        }
+    }
+
+    /**
      * Resolves a class name to an object.
      *
      * @template T of object
-     * @param string $resolver
-     * @phpstan-param class-string<T> $resolver
-     * @return object
-     * @phpstan-return T
-     * @throws ReflectionException
+     * @param class-string<T> $resolver
+     * @return T
+     * @throws ResolveFailedException
      */
     public function resolve(string $resolver): object
     {
-        $ref = new ReflectionClass($resolver);
-
-        if (!$ref->isInstantiable()) {
-            throw new ReflectionException(\sprintf('%s is not instantiable', $resolver)); // @codeCoverageIgnore
+        $result = $this->tryResolve($resolver);
+        if (!$result->isResolved()) {
+            throw new ResolveFailedException($resolver, $result->error);
         }
+        return $result->getInstance();
+    }
 
-        if ($ref->getConstructor() === null || $ref->getConstructor()->getNumberOfParameters() === 0) {
-            // no constructor or no parameters
-            return $ref->newInstance();
+    /**
+     * Tries to resolve ReflectionParameter to a value. No exception is thrown.
+     * @param ReflectionParameter $param
+     * @return ClassResolverResult<mixed>
+     */
+    public function tryResolveParameter(ReflectionParameter $param): ClassResolverResult
+    {
+        try {
+            if ($param->isVariadic()) {
+                return ClassResolverResult::failed(
+                    new ReflectionException(\sprintf('variadic parameter %s is not supported', $param->getName())),
+                );
+            }
+            if (!$param->hasType()) {
+                return ClassResolverResult::failed(
+                    new ReflectionException(\sprintf('type of "%s" is not defined. All constructor properties must have type.', $param->getName())),
+                );
+            }
+
+            $type = $param->getType();
+            \assert(!\is_null($type));
+
+            if ($type instanceof ReflectionNamedType && $this->container->has($type->getName())) {
+                return ClassResolverResult::resolved($this->container->get($type->getName()));
+            } elseif ($type instanceof ReflectionUnionType) {
+                return ClassResolverResult::failed(
+                    new ReflectionException(\sprintf('union type is not supported for parameter "%s"', $param->getName())),
+                );
+            } elseif ($type instanceof ReflectionIntersectionType) {
+                return ClassResolverResult::failed(
+                    new ReflectionException(\sprintf('intersection type is not supported for parameter "%s"', $param->getName())),
+                );
+            }
+
+            if ($param->isDefaultValueAvailable()) {
+                return ClassResolverResult::resolved($param->getDefaultValue());
+            } elseif ($param->allowsNull()) {
+                return ClassResolverResult::resolved(null);
+            }
+
+            return ClassResolverResult::failed(
+                new ReflectionException(\sprintf('unknown type for parameter "%s"', $param->getName())),
+            );
+        } catch (Throwable $e) {
+            return ClassResolverResult::failed(
+                new ReflectionException(\sprintf('failed to resolve parameter "%s"', $param->getName()), 0, $e),
+            );
         }
-
-        if (\array_key_exists($resolver, $this->resolving_concretes)) {
-            throw new ReflectionException(\sprintf('circular dependency detected: %s', $resolver));
-        }
-        $this->resolving_concretes[$resolver] = true;
-
-        $resolvedParams = [];
-        foreach ($ref->getConstructor()->getParameters() as $param) {
-            $resolvedParams[] = $this->resolveParameter($param);
-        }
-
-        unset($this->resolving_concretes[$resolver]);
-        $concrete = $ref->newInstanceArgs($resolvedParams);
-
-        // @phpstan-ignore identical.alwaysFalse
-        if ($concrete === null) {
-            throw new ReflectionException(\sprintf('failed to instantiate %s', $resolver)); // @codeCoverageIgnore
-        }
-
-        return $concrete;
     }
 
     /**
@@ -86,28 +175,11 @@ final class ClassResolver
      */
     public function resolveParameter(ReflectionParameter $param): mixed
     {
-        if ($param->isDefaultValueAvailable()) {
-            return $param->getDefaultValue();
+        $result = $this->tryResolveParameter($param);
+
+        if (!$result->isResolved()) {
+            throw new ResolveFailedException($param->getName(), $result->error);
         }
-
-        $name = $param->getName();
-
-        if ($param->isVariadic()) {
-            throw new ReflectionException(\sprintf('variadic parameter %s is not supported', $name));
-        }
-
-        if (!$param->hasType()) {
-            throw new ReflectionException(\sprintf('type of "%s" is not defined. All constructor properties must have type.', $name));
-        }
-
-        $type = $param->getType();
-        \assert(!\is_null($type));
-        \assert($type instanceof \ReflectionNamedType);
-        $typeName = $type->getName();
-
-        if ($type->isBuiltin() && !$this->container->has($typeName)) {
-            throw new ReflectionException(\sprintf('built-in parameter type %s is not supported', $typeName));
-        }
-        return $this->container->get($typeName);
+        return $result->getInstance();
     }
 }

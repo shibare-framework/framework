@@ -16,10 +16,13 @@ use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use Shibare\Container\ClassResolver;
 use Shibare\Container\Container;
-use ReflectionException;
+use Shibare\Container\ClassResolverResult;
+use Shibare\Container\ResolveFailedException;
 
-#[UsesClass(Container::class)]
 #[CoversClass(ClassResolver::class)]
+#[CoversClass(ClassResolverResult::class)]
+#[CoversClass(ResolveFailedException::class)]
+#[UsesClass(Container::class)]
 final class ClassResolverTest extends TestCase
 {
     #[Test]
@@ -28,8 +31,8 @@ final class ClassResolverTest extends TestCase
         $container = $this->createStub(ContainerInterface::class);
         $resolver = new ClassResolver($container);
 
-        $this->expectException(ReflectionException::class);
-        $this->expectExceptionMessage('Class "Shibare\Tests\Container\ClassResolverTesta" does not exist');
+        $this->expectException(ResolveFailedException::class);
+        $this->expectExceptionMessage('Failed to resolve class Shibare\Tests\Container\ClassResolverTesta');
 
         // @phpstan-ignore argument.type
         $resolver->resolve('Shibare\Tests\Container\ClassResolverTesta');
@@ -51,8 +54,8 @@ final class ClassResolverTest extends TestCase
         $container = new Container();
         $resolver = new ClassResolver($container);
 
-        $this->expectException(ReflectionException::class);
-        $this->expectExceptionMessage('circular dependency detected: Shibare\Container\Tests\CircularDepsB');
+        $this->expectException(ResolveFailedException::class);
+        $this->expectExceptionMessage('Failed to resolve class Shibare\Container\Tests\CircularDepsA');
 
         $resolver->resolve(CircularDepsA::class);
     }
@@ -98,8 +101,8 @@ final class ClassResolverTest extends TestCase
         $container = new Container();
         $resolver = new ClassResolver($container);
 
-        $this->expectException(ReflectionException::class);
-        $this->expectExceptionMessage('variadic parameter d is not supported');
+        $this->expectException(ResolveFailedException::class);
+        $this->expectExceptionMessage('Failed to resolve class d');
 
         $resolver->resolveParameter(new \ReflectionParameter([StubClass::class, '__construct'], 'd'));
     }
@@ -110,8 +113,8 @@ final class ClassResolverTest extends TestCase
         $container = new Container();
         $resolver = new ClassResolver($container);
 
-        $this->expectException(ReflectionException::class);
-        $this->expectExceptionMessage('type of "a" is not defined. All constructor properties must have type.');
+        $this->expectException(ResolveFailedException::class);
+        $this->expectExceptionMessage('Failed to resolve class a');
 
         $resolver->resolveParameter(new \ReflectionParameter([StubClass::class, '__construct'], 'a'));
     }
@@ -122,8 +125,8 @@ final class ClassResolverTest extends TestCase
         $container = new Container();
         $resolver = new ClassResolver($container);
 
-        $this->expectException(ReflectionException::class);
-        $this->expectExceptionMessage('built-in parameter type float is not supported');
+        $this->expectException(ResolveFailedException::class);
+        $this->expectExceptionMessage('Failed to resolve class b');
 
         $resolver->resolveParameter(new \ReflectionParameter([StubClass::class, '__construct'], 'b'));
     }

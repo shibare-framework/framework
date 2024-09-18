@@ -16,6 +16,7 @@ use RuntimeException;
 
 /**
  * Represents Dependency Injection Container
+ * @package Shibare\Container
  */
 final class Container implements ContainerInterface
 {
@@ -54,7 +55,7 @@ final class Container implements ContainerInterface
     public function get(string $id): mixed
     {
         $resolver = $id;
-        if ($this->has($id)) {
+        if (\array_key_exists($id, $this->resolvers)) {
             $resolver = $this->resolvers[$id];
         }
 
@@ -63,30 +64,19 @@ final class Container implements ContainerInterface
         // 1. Concrete object
         if (\is_object($resolver)) {
             // returns the instanced object
-            /**
-             * @psalm-suppress InvalidReturnStatement
-             * @phpstan-ignore-next-line
-             */
             return $resolver;
         }
 
-        // 2. Existing class
+        // 2. Closure
+        if (\is_callable($resolver)) {
+            // calls the closure and returns the result
+            return $this->call($resolver);
+        }
+
+        // 3. Existing class
         if (\is_string($resolver) && \class_exists($resolver)) {
             // instances the class and returns it
-            /**
-             * @psalm-suppress InvalidReturnStatement
-             * @phpstan-ignore-next-line
-             */
             return $this->class_resolver->resolve($resolver);
-        }
-
-        // 3. Scalar
-        if ($this->has($id)) {
-            // returns the scalar or resource value
-            /**
-             * @phpstan-ignore-next-line
-             */
-            return $resolver;
         }
 
         throw new RuntimeException(\sprintf('%s is not registered to container', $id));
@@ -94,7 +84,32 @@ final class Container implements ContainerInterface
 
     public function has(string $id): bool
     {
-        return \array_key_exists($id, $this->resolvers);
+        $resolver = $id;
+        if (\array_key_exists($id, $this->resolvers)) {
+            $resolver = $this->resolvers[$id];
+        }
+
+        // the order of resolving is important!
+
+        // 1. Concrete object
+        if (\is_object($resolver)) {
+            return true;
+        }
+
+        // 2. Closure
+        if (\is_callable($resolver)) {
+            // calls the closure and returns the result
+            return true;
+        }
+
+        // 3. Existing class
+        if (\is_string($resolver) && \class_exists($resolver)) {
+            // instances the class and returns it
+            $result = $this->class_resolver->tryResolve($resolver);
+            return $result->isResolved();
+        }
+
+        return false;
     }
 
     public function call(callable $func, array $args = []): mixed

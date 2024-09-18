@@ -6,7 +6,7 @@ declare(strict_types=1);
  * @license MIT
  */
 
-namespace Ifb\Http\Middlewares\Cors;
+namespace Shibare\HttpServer\Tests\Middlewares\Cors;
 
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;

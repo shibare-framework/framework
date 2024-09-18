@@ -6,7 +6,7 @@ declare(strict_types=1);
  * @license MIT
  */
 
-namespace Ifb\Http\Middlewares\Cors;
+namespace Shibare\HttpServer\Tests\Middlewares\Cors;
 
 use InvalidArgumentException;
 use PHPUnit\Framework\Attributes\CoversClass;

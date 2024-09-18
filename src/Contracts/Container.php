@@ -18,15 +18,6 @@ use Psr\Container\ContainerInterface;
 interface Container extends ContainerInterface
 {
     /**
-     * {@inheritDoc}
-     * @template T of object
-     * @param class-string<T> $id
-     * @return T
-     * @psalm-suppress MoreSpecificImplementedParamType
-     */
-    public function get(string $id): mixed;
-
-    /**
      * Bind a resolver to the container
      * @param string $id
      * @param mixed $resolver
