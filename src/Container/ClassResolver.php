@@ -23,7 +23,7 @@ use Throwable;
  * @psalm-internal
  * @internal
  */
-final class ClassResolver
+class ClassResolver
 {
     /**
      * @var array<class-string, bool>
@@ -83,18 +83,24 @@ final class ClassResolver
                     /** @var ClassResolverResult<never> */
                     return $p;
                 }
-                $resolved_params[] = $p->getInstance();
+                $resolved_params[$param->getName()] = $p->getInstance();
             }
 
             $instance = $ref->newInstanceArgs($resolved_params);
-            \assert($instance instanceof $resolver);
+            if ($instance instanceof $resolver === false) {
+                // @codeCoverageIgnoreStart
+                return ClassResolverResult::failed(
+                    new ReflectionException(\sprintf('resolved class "%s" is not an instance of "%s"', $resolver, $resolver)),
+                );
+                // @codeCoverageIgnoreEnd
+            }
 
             /** @var ClassResolverResult<T> $result */
             $result = ClassResolverResult::resolved($instance);
 
             return $result;
-        } catch (Throwable $e) {
-            return ClassResolverResult::failed($e);
+        } catch (Throwable $e) { // @codeCoverageIgnore
+            return ClassResolverResult::failed($e); // @codeCoverageIgnore
         } finally {
             unset($this->resolving_concretes[$resolver]);
         }
@@ -139,8 +145,10 @@ final class ClassResolver
             $type = $param->getType();
             \assert(!\is_null($type));
 
-            if ($type instanceof ReflectionNamedType && $this->container->has($type->getName())) {
-                return ClassResolverResult::resolved($this->container->get($type->getName()));
+            if ($type instanceof ReflectionNamedType) {
+                if ($this->container->has($type->getName())) {
+                    return ClassResolverResult::resolved($this->container->get($type->getName()));
+                }
             } elseif ($type instanceof ReflectionUnionType) {
                 return ClassResolverResult::failed(
                     new ReflectionException(\sprintf('union type is not supported for parameter "%s"', $param->getName())),
@@ -157,13 +165,16 @@ final class ClassResolver
                 return ClassResolverResult::resolved(null);
             }
 
+            $type_name = \method_exists($type, 'getName') ? $type->getName() : '';
             return ClassResolverResult::failed(
-                new ReflectionException(\sprintf('unknown type for parameter "%s"', $param->getName())),
+                new ReflectionException(\sprintf('unknown type for parameter "%s $%s"', $type_name, $param->getName())),
             );
+            // @codeCoverageIgnoreStart
         } catch (Throwable $e) {
             return ClassResolverResult::failed(
                 new ReflectionException(\sprintf('failed to resolve parameter "%s"', $param->getName()), 0, $e),
             );
+            // @codeCoverageIgnoreEnd
         }
     }
 

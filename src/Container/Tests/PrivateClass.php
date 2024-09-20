@@ -9,10 +9,8 @@ declare(strict_types=1);
 
 namespace Shibare\Container\Tests;
 
-final class CircularDepsA
+final class PrivateClass
 {
-    // @phpstan-ignore constructor.unusedParameter
-    public function __construct(
-        CircularDepsB $b,
+    private function __construct(
     ) {}
 }

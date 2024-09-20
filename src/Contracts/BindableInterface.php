@@ -9,19 +9,20 @@ declare(strict_types=1);
 
 namespace Shibare\Contracts;
 
-use Psr\Container\ContainerInterface;
+use Psr\Container\ContainerExceptionInterface;
 
 /**
- * Container interface
+ * Bindable interface
  * @package Shibare\Contracts
  */
-interface Container extends ContainerInterface
+interface BindableInterface
 {
     /**
      * Bind a resolver to the container
      * @param string $id
      * @param mixed $resolver
      * @return void
+     * @throws ContainerExceptionInterface when resource will be registered or already registered id
      */
     public function bind(string $id, mixed $resolver): void;
 
@@ -30,6 +31,7 @@ interface Container extends ContainerInterface
      * @param string $id
      * @param mixed $resolver
      * @return void
+     * @throws ContainerExceptionInterface when resource will be registered
      */
     public function forceBind(string $id, mixed $resolver): void;
 
@@ -41,10 +43,8 @@ interface Container extends ContainerInterface
     public function unbind(string $id): void;
 
     /**
-     * Check if the container has a resolver
-     * @param callable $func
-     * @param array<array-key, mixed> $args
-     * @return mixed
+     * Unbind all resolvers from the container
+     * @return void
      */
-    public function call(callable $func, array $args = []): mixed;
+    public function unbindAll(): void;
 }

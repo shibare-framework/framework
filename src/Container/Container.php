@@ -10,29 +10,29 @@ declare(strict_types=1);
 namespace Shibare\Container;
 
 use Closure;
-use Shibare\Contracts\Container as ContainerInterface;
+use Shibare\Contracts\ContainerInterface;
 use ReflectionFunction;
-use RuntimeException;
 
 /**
- * Represents Dependency Injection Container
+ * Represents Dependency Injection Container implementation
  * @package Shibare\Container
  */
 final class Container implements ContainerInterface
 {
     /** @var array<string, mixed> $resolvers */
     private array $resolvers = [];
+
     private ClassResolver $class_resolver;
 
-    public function __construct()
+    public function __construct(?ClassResolver $class_resolver = null)
     {
-        $this->class_resolver = new ClassResolver($this);
+        $this->class_resolver = $class_resolver ?? new ClassResolver($this);
     }
 
     public function bind(string $id, mixed $resolver): void
     {
         if (\array_key_exists($id, $this->resolvers)) {
-            throw new RuntimeException(\sprintf('%s is already registered to container', $id));
+            throw new ContainerException(\sprintf('"%s" is already registered to container', $id));
         }
 
         $this->forceBind($id, $resolver);
@@ -41,7 +41,7 @@ final class Container implements ContainerInterface
     public function forceBind(string $id, mixed $resolver): void
     {
         if (\is_resource($resolver)) {
-            throw new RuntimeException('resource cannot be registered to container to avoid memory leak');
+            throw new ContainerException('resource cannot be registered to container to avoid memory leak');
         }
 
         $this->resolvers[$id] = $resolver;
@@ -52,85 +52,132 @@ final class Container implements ContainerInterface
         unset($this->resolvers[$id]);
     }
 
-    public function get(string $id): mixed
+    public function unbindAll(): void
     {
-        $resolver = $id;
-        if (\array_key_exists($id, $this->resolvers)) {
-            $resolver = $this->resolvers[$id];
+        $this->resolvers = [];
+    }
+
+    public function getClass(string $class_name): object
+    {
+        if (!\array_key_exists($class_name, $this->resolvers)) {
+            return $this->class_resolver->resolve($class_name);
         }
 
-        // the order of resolving is important!
-
-        // 1. Concrete object
-        if (\is_object($resolver)) {
-            // returns the instanced object
+        $resolver = $this->resolvers[$class_name];
+        if (\is_object($resolver) && $resolver instanceof $class_name) {
             return $resolver;
         }
 
-        // 2. Closure
+        if (\is_callable($resolver)) {
+            $result = $this->call($resolver);
+            if ($result instanceof $class_name) {
+                return $result;
+            }
+        }
+
+        if (\is_string($resolver) && \class_exists($resolver)) {
+            $result = $this->class_resolver->resolve($resolver);
+            if ($result instanceof $class_name) {
+                return $result;
+            }
+        }
+
+        throw new ContainerException(\sprintf('"%s" is bound but got "%s"', $class_name, \get_debug_type($resolver)));
+    }
+
+    public function get(string $id): mixed
+    {
+        if (!\array_key_exists($id, $this->resolvers)) {
+            if (\class_exists($id)) {
+                return $this->class_resolver->resolve($id);
+            }
+            throw new ResolveFailedException(\sprintf('"%s" is not registered to container', $id));
+        }
+
+        $resolver = $this->resolvers[$id];
+
         if (\is_callable($resolver)) {
             // calls the closure and returns the result
             return $this->call($resolver);
         }
 
-        // 3. Existing class
+        if (\is_object($resolver)) {
+            // returns the instanced object
+            return $resolver;
+        }
+
         if (\is_string($resolver) && \class_exists($resolver)) {
-            // instances the class and returns it
             return $this->class_resolver->resolve($resolver);
         }
 
-        throw new RuntimeException(\sprintf('%s is not registered to container', $id));
+        return $resolver;
     }
 
     public function has(string $id): bool
     {
-        $resolver = $id;
-        if (\array_key_exists($id, $this->resolvers)) {
-            $resolver = $this->resolvers[$id];
+        if (!\array_key_exists($id, $this->resolvers)) {
+            if (\class_exists($id)) {
+                return $this->class_resolver->tryResolve($id)->isResolved();
+            }
+            return false;
         }
 
-        // the order of resolving is important!
+        $resolver = $this->resolvers[$id];
 
-        // 1. Concrete object
+        if (\is_callable($resolver)) {
+            return $this->isCallable($resolver);
+        }
+
         if (\is_object($resolver)) {
             return true;
         }
 
-        // 2. Closure
-        if (\is_callable($resolver)) {
-            // calls the closure and returns the result
-            return true;
-        }
-
-        // 3. Existing class
         if (\is_string($resolver) && \class_exists($resolver)) {
-            // instances the class and returns it
-            $result = $this->class_resolver->tryResolve($resolver);
-            return $result->isResolved();
+            return $this->class_resolver->tryResolve($resolver)->isResolved();
         }
 
-        return false;
+        return true;
     }
 
     public function call(callable $func, array $args = []): mixed
     {
         $ref = new ReflectionFunction(Closure::fromCallable($func));
 
-        if ($ref->getNumberOfParameters() === 0) {
-            // no parameters
-            return $ref->invoke();
-        }
-
-        $resolvedArgs = [];
+        $resolved_args = [];
         foreach ($ref->getParameters() as $param) {
-            if (\array_key_exists($param->getName(), $args)) {
+            $name = $param->getName();
+            if (\array_key_exists($name, $args)) {
                 // the argument is explicitly passed
-                $resolvedArgs[] = $args[$param->getName()];
+                $resolved_args[$name] = $args[$name];
                 continue;
             }
-            $resolvedArgs[$param->getName()] = $this->class_resolver->resolveParameter($param);
+            $resolved_args[$name] = $this->class_resolver->resolveParameter($param);
         }
 
-        return $ref->invokeArgs($resolvedArgs);
+        return $ref->invokeArgs($resolved_args);
+    }
+
+    /**
+     * Check if the container has a callable resolver
+     * @param callable $func
+     * @param array<array-key, mixed> $args
+     * @return bool
+     */
+    private function isCallable(callable $func, array $args = []): bool
+    {
+        $ref = new ReflectionFunction(Closure::fromCallable($func));
+
+        foreach ($ref->getParameters() as $param) {
+            $name = $param->getName();
+            if (\array_key_exists($name, $args)) {
+                continue; // @codeCoverageIgnore
+            }
+            $result = $this->class_resolver->tryResolveParameter($param);
+            if (!$result->isResolved()) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
