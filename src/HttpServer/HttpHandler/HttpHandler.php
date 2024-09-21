@@ -9,12 +9,15 @@ declare(strict_types=1);
 
 namespace Shibare\HttpServer\HttpHandler;
 
+use Closure;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use ReflectionFunction;
+use ReflectionNamedType;
 
 class HttpHandler implements RequestHandlerInterface
 {
@@ -51,11 +54,20 @@ class HttpHandler implements RequestHandlerInterface
         if (\is_callable($handler) === false) {
             throw new InvalidHandlerDefinitionException(\sprintf('Handler %s must be callable or implement __invoke method', $this->handler_name));
         }
-        $input_generator = new InputGenerator($this->handler_name);
-        $input = $input_generator->generateInput($request);
-        $output = $handler($input);
-        $output_converter = new OutputConverter();
-        $result = $output_converter->convert($output);
+        $ref = new ReflectionFunction(Closure::fromCallable($handler));
+        $input_class_name = null;
+        foreach ($ref->getParameters() as $param) {
+            if ($param->getType() instanceof ReflectionNamedType) {
+                $input_class_name = $param->getType()->getName();
+                break;
+            }
+        }
+        $args = [];
+        if (!\is_null($input_class_name) && \class_exists($input_class_name)) {
+            $args['input'] = (new InputGenerator($input_class_name))->generateInput($request);
+        }
+        $output = $ref->invokeArgs($args);
+        $result = (new OutputConverter())->convert($output);
 
         $response_factory = $this->container->get(ResponseFactoryInterface::class);
         \assert($response_factory instanceof ResponseFactoryInterface);
