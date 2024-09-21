@@ -11,6 +11,7 @@ namespace Shibare\Log\Formatters;
 
 use Shibare\Log\FormatterInterface;
 use Shibare\Log\Rfc5424LogLevel;
+use Throwable;
 
 /**
  * JSON-Line formatter
@@ -35,6 +36,9 @@ class JsonLineFormatter implements FormatterInterface
 
         $ctx['level'] = $log_level->toPsrLogLevel();
         $ctx['message'] = $message;
+        if (\array_key_exists('exception', $context) && $context['exception'] instanceof Throwable) {
+            $context['exception'] = $this->formatException($context['exception']);
+        }
         $ctx['context'] = $context;
 
         $line = \json_encode($ctx, $this->json_flags) . $this->line_endings;
@@ -46,5 +50,52 @@ class JsonLineFormatter implements FormatterInterface
         }
 
         return $line;
+    }
+
+    /**
+     * Format exception object
+     * @param Throwable $exception
+     * @return array<string, mixed>
+     */
+    private function formatException(Throwable $exception): array
+    {
+        $result = [
+            'message' => $exception->getMessage(),
+            'code' => $exception->getCode(),
+            'file' => $exception->getFile(),
+            'line' => $exception->getLine(),
+            'trace' => $this->formatTrace($exception->getTrace()),
+        ];
+
+        if ($exception->getPrevious()) {
+            $result['previous'] = $this->formatException($exception->getPrevious());
+        }
+
+        return $result;
+    }
+
+    /**
+     * Format exception trace
+     * @param list<array<string, mixed>> $trace
+     * @return string[]
+     */
+    private function formatTrace(array $trace): array
+    {
+        $result = [];
+
+        foreach ($trace as $data) {
+            if (\array_key_exists('file', $data) && \is_string($data['file']) && \str_contains($data['file'], 'vendor')) {
+                // skip vendor files
+                continue;
+            }
+
+            $result[] = \sprintf('%s%s%s',
+                \array_key_exists('class', $data) && \is_string($data['class']) ? $data['class'] : '',
+                \array_key_exists('type', $data) && \is_string($data['type']) ? $data['type'] : '',
+                \array_key_exists('function', $data) && \is_string($data['function']) ? $data['function'] : '',
+            );
+        }
+
+        return $result;
     }
 }
