@@ -48,14 +48,24 @@ class InputGenerator
 
         if (\is_null($constructor)) {
             // no constructor definition
-            return $ref_class->newInstance();
+            $input = $ref_class->newInstance();
+
+            if ($input instanceof ServerRequestAwareInterface) {
+                $input->setServerRequest($request);
+            }
+            return $input;
         }
 
         $parameters = $constructor->getParameters();
 
         if (\count($parameters) === 0) {
             // no parameters
-            return $ref_class->newInstance();
+            $input = $ref_class->newInstance();
+
+            if ($input instanceof ServerRequestAwareInterface) {
+                $input->setServerRequest($request);
+            }
+            return $input;
         }
 
         $args = [];

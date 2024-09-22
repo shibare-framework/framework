@@ -13,6 +13,7 @@ use Psr\Http\Message\ServerRequestInterface;
 
 /**
  * Implementation of ServerRequestAwareInterface
+ * @phpstan-require-implements \Shibare\Contracts\HttpServer\ServerRequestAwareInterface
  */
 trait ServerRequestAwareTrait
 {
