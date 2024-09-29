@@ -10,7 +10,6 @@ declare(strict_types=1);
 namespace Shibare\Config\Tests;
 
 use PHPUnit\Framework\Attributes\CoversClass;
-use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Shibare\Config\ArrayConfig;
@@ -18,6 +17,7 @@ use Shibare\Contracts\Config\ConfigNotFoundException;
 use Shibare\Contracts\Config\InvalidConfigException;
 
 #[CoversClass(ArrayConfig::class)]
+#[CoversClass(ConfigNotFoundException::class)]
 final class ArrayConfigTest extends TestCase
 {
     #[Test]
@@ -91,6 +91,19 @@ final class ArrayConfigTest extends TestCase
         $this->expectExceptionMessage('"float" is not string, got "double"');
 
         $config->getString('float');
+    }
+
+    #[Test]
+    public function testGetInvalidStringArray(): void
+    {
+        $config = new ArrayConfig([
+            'float' => [1.5],
+        ]);
+
+        $this->expectException(InvalidConfigException::class);
+        $this->expectExceptionMessage('"float" is not string, got "double"');
+
+        $config->getStringArray('float');
     }
 
     #[Test]
