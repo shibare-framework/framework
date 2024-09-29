@@ -1,6 +1,6 @@
 # Shibare PHP Simple, Short, Smart Framework
 
-![Packagist Version](https://img.shields.io/packagist/v/shibare/framework) [![Test](https://github.com/shibare-framework/framework/actions/workflows/test.yaml/badge.svg)](https://github.com/shibare-framework/framework/actions/workflows/test.yaml)
+[![Packagist Version](https://img.shields.io/packagist/v/shibare/framework)](https://packagist.org/packages/shibare/framework) [![Test](https://github.com/shibare-framework/framework/actions/workflows/test.yaml/badge.svg)](https://github.com/shibare-framework/framework/actions/workflows/test.yaml)
 
 ## Features
 
