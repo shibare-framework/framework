@@ -5,7 +5,7 @@ declare(strict_types=1);
 /**
  * Class ClockTest
  * @package Shibare\Clock
- * @author Masaru Yamagishi <akai_inu@live.jp>
+ * @author Masaru Yamagishi <m.yamagishi90+git@gmail.com>
  * @license Apache-2.0
  */
 
