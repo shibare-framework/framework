@@ -3,81 +3,110 @@
 declare(strict_types=1);
 
 /**
- * @author Masaru Yamagishi <akai_inu@live.jp>
+ * @author Masaru Yamagishi <m.yamagishi90+git@gmail.com>
  * @license Apache-2.0
  */
 
 namespace Shibare\Config;
 
-use Shibare\Contracts\Config;
+use Shibare\Contracts\Config\ConfigInterface;
+use Shibare\Contracts\Config\ConfigNotFoundException;
+use Shibare\Contracts\Config\InvalidConfigException;
 
-final /* readonly */ class ArrayConfig implements Config
+final readonly class ArrayConfig implements ConfigInterface
 {
     /**
-     * Constructor
-     * @param array<string, bool|float|string|int|null> $config
+     * @param array<array-key, mixed> $config
      */
     public function __construct(
-        private readonly array $config,
+        private array $config,
     ) {}
+
+    private function getValue(string $key): mixed
+    {
+        if (!\array_key_exists($key, $this->config)) {
+            throw new ConfigNotFoundException($key);
+        }
+        return $this->config[$key];
+    }
+
+    public function getArray(string $key): array
+    {
+        $value = $this->getValue($key);
+        if (!\is_array($value)) {
+            throw new InvalidConfigException(\sprintf('"%s" is not array, got "%s"', $key, \gettype($value)));
+        }
+        return $value;
+    }
 
     public function getString(string $key): string
     {
-        if (!\array_key_exists($key, $this->config)) {
-            throw new \InvalidArgumentException('Undefined config key provided key=' . $key);
-        }
-        $value = $this->config[$key];
+        $value = $this->getValue($key);
         if (!\is_string($value)) {
-            throw new \InvalidArgumentException('Invalid config value type provided key=' . $key . ' value=' . \gettype($value));
+            throw new InvalidConfigException(\sprintf('"%s" is not string, got "%s"', $key, \gettype($value)));
         }
-        return (string) $value;
+        return $value;
     }
 
     public function getStringArray(string $key): array
     {
-        $value = $this->getString($key);
-        $valuesRaw = \explode(',', $value);
-        $values = [];
-        foreach ($valuesRaw as $v) {
-            $values[] = \strval($v);
-        }
-        return $values;
-    }
-
-    public function getInteger(string $key): int
-    {
-        $value = $this->getString($key);
-        if (1 !== \preg_match('/^([0-9]|[1-9]+[0-9]*)$/', $value)) {
-            throw new \InvalidArgumentException('Invalid config value provided key=' . $key . ' value=' . $value);
-        }
-        return \intval($value);
-    }
-
-    public function getIntegerArray(string $key): array
-    {
-        $value = $this->getString($key);
-        $valuesRaw = \explode(',', $value);
-        $values = [];
-        foreach ($valuesRaw as $v) {
-            if (1 !== \preg_match('/^([0-9]|[1-9]+[0-9]*)$/', $v)) {
-                throw new \InvalidArgumentException('Invalid config value provided key=' . $key . ' value=' . $v);
+        $value = $this->getArray($key);
+        $result = [];
+        foreach ($value as $v) {
+            if (!\is_string($v)) {
+                throw new InvalidConfigException(\sprintf('"%s" is not string, got "%s"', $key, \gettype($v)));
             }
-            $values[] = \intval($v);
+            $result[] = $v;
         }
-        return $values;
+        return $result;
+    }
+
+    public function getNonEmptyString(string $key): string
+    {
+        $value = $this->getString($key);
+        if ($value === '') {
+            throw new InvalidConfigException(\sprintf('"%s" is empty', $key));
+        }
+        return $value;
+    }
+
+    public function getNonEmptyStringArray(string $key): array
+    {
+        $value = $this->getStringArray($key);
+        $result = [];
+        foreach ($value as $v) {
+            if ($v === '') {
+                throw new InvalidConfigException(\sprintf('"%s" has empty value', $key));
+            }
+            $result[] = $v;
+        }
+        return $result;
     }
 
     public function getBoolean(string $key): bool
     {
-        $value = $this->getString($key);
-
-        if ($value === 'true') {
-            return true;
+        $value = $this->getValue($key);
+        if (!\is_bool($value)) {
+            throw new InvalidConfigException(\sprintf('"%s" is not boolean, got "%s"', $key, \gettype($value)));
         }
-        if ($value === 'false') {
-            return false;
-        }
+        return $value;
+    }
 
-        throw new \InvalidArgumentException('Invalid config value provided key=' . $key . ' value=' . $value);
+    public function getInteger(string $key): int
+    {
+        $value = $this->getValue($key);
+        if (!\is_int($value)) {
+            throw new InvalidConfigException(\sprintf('"%s" is not integer, got "%s"', $key, \gettype($value)));
+        }
+        return $value;
+    }
+
+    public function getFloat(string $key): float
+    {
+        $value = $this->getValue($key);
+        if (!\is_float($value)) {
+            throw new InvalidConfigException(\sprintf('"%s" is not float, got "%s"', $key, \gettype($value)));
+        }
+        return $value;
     }
 }

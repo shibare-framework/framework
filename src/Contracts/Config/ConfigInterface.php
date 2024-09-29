@@ -73,4 +73,13 @@ interface ConfigInterface
      * @throws ConfigNotFoundException
      */
     public function getInteger(string $key): int;
+
+    /**
+     * Get value as float
+     * @param string $key
+     * @return float
+     * @throws InvalidConfigException
+     * @throws ConfigNotFoundException
+     */
+    public function getFloat(string $key): float;
 }

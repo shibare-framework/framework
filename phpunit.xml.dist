@@ -16,6 +16,9 @@
         <testsuite name="Clock">
             <directory>./src/Clock/Tests</directory>
         </testsuite>
+        <testsuite name="Config">
+            <directory>./src/Config/Tests</directory>
+        </testsuite>
         <testsuite name="Console">
             <directory>./src/Console/Tests</directory>
         </testsuite>
