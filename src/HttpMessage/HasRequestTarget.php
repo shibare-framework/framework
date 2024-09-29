@@ -29,16 +29,14 @@ trait HasRequestTarget
 
         $target = '/';
         $uri = $this->getUri();
-        if ($uri !== null) {
-            $path = $uri->getPath();
-            if ($path !== '') {
-                $target = $path;
-            }
+        $path = $uri->getPath();
+        if ($path !== '') {
+            $target = $path;
+        }
 
-            $query = $uri->getQuery();
-            if ($query !== '') {
-                $target .= '?' . $query;
-            }
+        $query = $uri->getQuery();
+        if ($query !== '') {
+            $target .= '?' . $query;
         }
 
         return $target;

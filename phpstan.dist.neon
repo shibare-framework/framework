@@ -5,3 +5,5 @@ parameters:
     excludePaths:
         analyse:
             - */vendor/*
+includes:
+    - phar://phpstan.phar/conf/bleedingEdge.neon

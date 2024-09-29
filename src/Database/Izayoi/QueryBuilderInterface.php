@@ -15,7 +15,6 @@ use Shibare\Database\Izayoi\Internal\QuerySelectInterface;
 use Shibare\Database\Izayoi\Internal\QueryWhereInterface;
 
 /**
- * @template TEntity of object
  * @package Shibare\Database\Izayoi
  */
 interface QueryBuilderInterface extends
@@ -26,36 +25,8 @@ interface QueryBuilderInterface extends
     QueryWhereInterface
 {
     /**
-     * Finds by primary keys
-     * @param int|string|list<int|string> $pks
-     * @return TEntity
-     * @throws EntityNotFoundException
-     */
-    public function find(int|string|array $pks): object;
-
-    /**
-     * Finds by primary keys and return null if not found
-     * @param int|string|list<int|string> $pks
-     * @return TEntity|null
-     */
-    public function findOrNull(int|string|array $pks): ?object;
-
-    /**
-     * Finds all items
-     * @return BuildResult
-     */
-    public function findAll(): BuildResult;
-
-    /**
-     * Finds first item
-     * @return TEntity
-     * @throws EntityNotFoundException
-     */
-    public function first(): object;
-
-    /**
      * Finds first item and return null if not found
-     * @return TEntity|null
+     * @return object|null
      */
     public function firstOrNull(): ?object;
 
@@ -69,13 +40,13 @@ interface QueryBuilderInterface extends
      * Executes raw query and returns raw \stdClass iterable(lazily)
      * @param string $sql
      * @param array<int, int|float|string> $bindings
-     * @return iterable<int, \stdClass>
+     * @return iterable<int, mixed>
      */
     public function executeRawQuery(string $sql, array $bindings): iterable;
 
     /**
      * Executes UNION with multiple builders
-     * @param QueryBuilderInterface<TEntity>|QueryBuilderInterface<TEntity>[] $builder
+     * @param QueryBuilderInterface|QueryBuilderInterface[] $builder
      * @return BuildResult
      */
     public function union(QueryBuilderInterface|array $builder): BuildResult;

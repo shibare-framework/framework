@@ -136,7 +136,7 @@ final class Stream implements StreamInterface
         }
 
         $stats = \fstat($this->stream);
-        if ($stats === false || !\array_key_exists('size', $stats)) {
+        if ($stats === false) {
             return null; // @codeCoverageIgnore
         }
         $this->cached_size = $stats['size'];

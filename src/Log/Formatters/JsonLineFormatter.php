@@ -89,7 +89,8 @@ class JsonLineFormatter implements FormatterInterface
                 continue;
             }
 
-            $result[] = \sprintf('%s%s%s',
+            $result[] = \sprintf(
+                '%s%s%s',
                 \array_key_exists('class', $data) && \is_string($data['class']) ? $data['class'] : '',
                 \array_key_exists('type', $data) && \is_string($data['type']) ? $data['type'] : '',
                 \array_key_exists('function', $data) && \is_string($data['function']) ? $data['function'] : '',

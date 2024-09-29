@@ -57,8 +57,6 @@ class RoadRunnerHttpDispatcher
                 // @codeCoverageIgnoreEnd
             }
 
-            \assert($request instanceof ServerRequestInterface);
-
             try {
                 $response = $handler->handle($request);
                 $worker->respond($response);

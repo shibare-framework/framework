@@ -16,6 +16,4 @@ use RuntimeException;
  * Exception when operation failed in container
  * @package Shibare\Container
  */
-class ContainerException extends RuntimeException implements ContainerExceptionInterface
-{
-}
+class ContainerException extends RuntimeException implements ContainerExceptionInterface {}

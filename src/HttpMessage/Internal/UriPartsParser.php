@@ -93,7 +93,6 @@ final class UriPartsParser
         );
         if ($foundIpv6) {
             // The host is IPv6
-            \assert(\count($matches) === 3);
             $prefix = $matches[1];
             $urlMayExceptPrefix = $matches[2];
         }

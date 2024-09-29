@@ -10,6 +10,7 @@ namespace Shibare\Database\Izayoi\Internal;
 
 /**
  * Implements of QueryGroupByInterface
+ * @phpstan-require-implements QueryGroupByInterface
  */
 trait GroupByQueryBuilderTrait
 {

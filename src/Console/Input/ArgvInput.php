@@ -19,19 +19,25 @@ use Shibare\Console\InputInterface;
  * $input = new ArgvInput();
  * ```
  */
-final class ArgvInput implements InputInterface
+class ArgvInput implements InputInterface
 {
-    /** @var array<array-key, scalar> $input */
+    /** @var array<array-key, mixed> $input */
     public readonly array $input;
 
     /**
      * ArrayInput constructor
-     * @param null|array<array-key, scalar> $input
+     * @param null|array<array-key, mixed> $input
      */
     public function __construct(
         ?array $input = null,
     ) {
-        $this->input = $input ?? $_SERVER['argv'] ?? [];
+        if (\is_null($input)) {
+            $argv = $_SERVER['argv'];
+            \assert(\is_array($argv));
+            $this->input = $argv;
+        } else {
+            $this->input = $input;
+        }
     }
 
     public function getCommandName(): ?string

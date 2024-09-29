@@ -12,6 +12,7 @@ use InvalidArgumentException;
 
 /**
  * Implements of ORDER BY
+ * @phpstan-require-implements QueryOrderByInterface
  */
 trait OrderByQueryBuilderTrait
 {

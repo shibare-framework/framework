@@ -98,7 +98,6 @@
   "scripts": {
     "lint": [
       "./vendor/bin/phpstan analyse src",
-      "./tools/psalm",
       "./tools/php-cs-fixer check"
     ],
     "fix": "./tools/php-cs-fixer fix",

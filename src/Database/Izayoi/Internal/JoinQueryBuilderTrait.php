@@ -10,6 +10,7 @@ namespace Shibare\Database\Izayoi\Internal;
 
 /**
  * Implements of QueryJoinInterface
+ * @phpstan-require-implements QueryJoinInterface
  */
 trait JoinQueryBuilderTrait
 {

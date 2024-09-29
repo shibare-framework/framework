@@ -106,7 +106,7 @@ final class ContainerTest extends TestCase
         yield 'concrete' => [stdClass::class, $concrete, $concrete];
 
         $concrete2 = new stdClass();
-        $callable = fn (): stdClass => $concrete2;
+        $callable = fn(): stdClass => $concrete2;
         yield 'callable' => [stdClass::class, $callable, $concrete2];
     }
 
@@ -210,7 +210,7 @@ final class ContainerTest extends TestCase
         $container = new Container();
 
         $concrete = new stdClass();
-        $callable = fn (): stdClass => $concrete;
+        $callable = fn(): stdClass => $concrete;
         $container->bind('a', $callable);
 
         self::assertTrue($container->has('a'));
@@ -244,7 +244,7 @@ final class ContainerTest extends TestCase
         $container->bind(stdClass::class, $concrete);
 
         $result = $container->call(
-            fn (string $a, stdClass $concrete): string => $a,
+            fn(string $a, stdClass $concrete): string => $a,
             ['a' => 'a'],
         );
 
@@ -258,7 +258,7 @@ final class ContainerTest extends TestCase
         $class_resolver->method('tryResolveParameter')->willReturn(ClassResolverResult::failed(new ResolveFailedException('')));
         $container = new Container($class_resolver);
 
-        $container->bind('a', fn (ContainerAwareInterface $i): null => null);
+        $container->bind('a', fn(ContainerAwareInterface $i): null => null);
 
         self::assertFalse($container->has('a'));
     }

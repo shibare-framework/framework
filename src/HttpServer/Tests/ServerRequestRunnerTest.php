@@ -28,7 +28,6 @@ final class ServerRequestRunnerTest extends TestCase
     #[Test]
     public function testEmptyMiddleware(): void
     {
-        /** @var ResponseInterface $response */
         $response = self::createStub(ResponseInterface::class);
         /** @var \PHPUnit\Framework\MockObject\MockObject&RequestHandlerInterface $handler */
         $handler = $this->createMock(RequestHandlerInterface::class);
@@ -37,7 +36,6 @@ final class ServerRequestRunnerTest extends TestCase
             ->willReturn($response);
         $runner = new ServerRequestRunner([], $handler);
 
-        /** @var ServerRequestInterface $request */
         $request = self::createStub(ServerRequestInterface::class);
 
         $actual = $runner->handle($request);

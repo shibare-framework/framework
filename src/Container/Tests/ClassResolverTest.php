@@ -106,19 +106,19 @@ final class ClassResolverTest extends TestCase
      */
     public static function getTryResolveParameter(): iterable
     {
-        yield 'variadic' => [new ReflectionParameter(fn (mixed ...$args) => null, 'args'), ClassResolverResult::failed(new ReflectionException('variadic parameter args is not supported'))];
+        yield 'variadic' => [new ReflectionParameter(fn(mixed ...$args) => null, 'args'), ClassResolverResult::failed(new ReflectionException('variadic parameter args is not supported'))];
 
-        yield 'no type' => [new ReflectionParameter(fn ($arg) => null, 'arg'), ClassResolverResult::failed(new ReflectionException('type of "arg" is not defined. All constructor properties must have type.'))];
+        yield 'no type' => [new ReflectionParameter(fn($arg) => null, 'arg'), ClassResolverResult::failed(new ReflectionException('type of "arg" is not defined. All constructor properties must have type.'))];
 
-        yield 'not found' => [new ReflectionParameter(fn (ContainerInterface $arg) => null, 'arg'), ClassResolverResult::failed(new ReflectionException('unknown type for parameter "Psr\Container\ContainerInterface $arg"'))];
+        yield 'not found' => [new ReflectionParameter(fn(ContainerInterface $arg) => null, 'arg'), ClassResolverResult::failed(new ReflectionException('unknown type for parameter "Psr\Container\ContainerInterface $arg"'))];
 
-        yield 'union type' => [new ReflectionParameter(fn (stdClass|ContainerInterface $arg) => null, 'arg'), ClassResolverResult::failed(new ReflectionException('union type is not supported for parameter "arg"'))];
+        yield 'union type' => [new ReflectionParameter(fn(stdClass|ContainerInterface $arg) => null, 'arg'), ClassResolverResult::failed(new ReflectionException('union type is not supported for parameter "arg"'))];
 
-        yield 'intersection type' => [new ReflectionParameter(fn (stdClass&ContainerInterface $arg) => null, 'arg'), ClassResolverResult::failed(new ReflectionException('intersection type is not supported for parameter "arg"'))];
+        yield 'intersection type' => [new ReflectionParameter(fn(stdClass&ContainerInterface $arg) => null, 'arg'), ClassResolverResult::failed(new ReflectionException('intersection type is not supported for parameter "arg"'))];
 
-        yield 'default value' => [new ReflectionParameter(fn (mixed $arg = 'a') => null, 'arg'), ClassResolverResult::resolved('a')];
+        yield 'default value' => [new ReflectionParameter(fn(mixed $arg = 'a') => null, 'arg'), ClassResolverResult::resolved('a')];
 
-        yield 'allows null' => [new ReflectionParameter(fn (?ContainerInterface $arg) => null, 'arg'), ClassResolverResult::resolved(null)];
+        yield 'allows null' => [new ReflectionParameter(fn(?ContainerInterface $arg) => null, 'arg'), ClassResolverResult::resolved(null)];
     }
 
     /**
@@ -145,7 +145,7 @@ final class ClassResolverTest extends TestCase
     {
         $resolver = new ClassResolver(new Container());
 
-        $param = new ReflectionParameter(fn (stdClass $arg) => null, 'arg');
+        $param = new ReflectionParameter(fn(stdClass $arg) => null, 'arg');
 
         $actual = $resolver->resolveParameter($param);
 
@@ -157,7 +157,7 @@ final class ClassResolverTest extends TestCase
     {
         $resolver = new ClassResolver(new Container());
 
-        $param = new ReflectionParameter(fn (ContainerInterface $arg) => null, 'arg');
+        $param = new ReflectionParameter(fn(ContainerInterface $arg) => null, 'arg');
 
         $this->expectException(ResolveFailedException::class);
         $this->expectExceptionMessage('Failed to resolve class "arg"');

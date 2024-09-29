@@ -337,7 +337,7 @@ use RuntimeException;
         $uri_string .= $this->getUserAndPass();
         $uri_string .= $this->getHostAndPort();
 
-        if (\array_key_exists('REQUEST_URI', $this->server)) {
+        if (\array_key_exists('REQUEST_URI', $this->server) && \is_string($this->server['REQUEST_URI'])) {
             $uri_string .= $this->server['REQUEST_URI'];
         }
 
@@ -374,6 +374,8 @@ use RuntimeException;
             return $this->server['HTTP_HOST'];
         }
         if (\array_key_exists('SERVER_NAME', $this->server) && \array_key_exists('SERVER_PORT', $this->server)) {
+            \assert(\is_string($this->server['SERVER_NAME']));
+            \assert(\is_scalar($this->server['SERVER_PORT']));
             return $this->server['SERVER_NAME'] . ':' . $this->server['SERVER_PORT'];
         }
         return 'localhost';

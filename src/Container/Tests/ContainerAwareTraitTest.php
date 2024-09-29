@@ -21,7 +21,7 @@ final class ContainerAwareTraitTest extends TestCase
     public function testSetContainer(): void
     {
         $container = self::createStub(ContainerInterface::class);
-        $trait = new class () implements ContainerAwareInterface {
+        $trait = new class implements ContainerAwareInterface {
             use ContainerAwareTrait;
 
             public function getContainer(): ?ContainerInterface

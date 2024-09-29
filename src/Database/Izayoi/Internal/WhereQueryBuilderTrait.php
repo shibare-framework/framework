@@ -12,6 +12,7 @@ use InvalidArgumentException;
 
 /**
  * Implements of QueryWhereInterface
+ * @phpstan-require-implements QueryWhereInterface
  */
 trait WhereQueryBuilderTrait
 {

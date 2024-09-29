@@ -10,6 +10,7 @@ namespace Shibare\Database\Izayoi\Internal;
 
 /**
  * Implements of QuerySelectInterface
+ * @phpstan-require-implements QuerySelectInterface
  */
 trait SelectQueryBuilderTrait
 {
