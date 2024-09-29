@@ -48,7 +48,7 @@
     "source": "https://github.com/shibare-framework/framework/"
   },
   "require": {
-    "php": "~8.2.0|~8.3.0",
+    "php": "~8.2.0|~8.3.0|~8.4.0",
     "ext-pdo": "*",
     "psr/cache": "^3.0.0",
     "psr/clock": "^1.0.0",

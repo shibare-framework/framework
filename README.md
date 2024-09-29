@@ -45,7 +45,7 @@
 
 ## Requirements
 
-- PHP ~8.2.0|~8.3.0
+- PHP ~8.2.0|~8.3.0|~8.4.0
 - No third-party requirements!(There is an adapter for these)
 
 ## Development
