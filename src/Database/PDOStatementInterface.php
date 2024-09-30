@@ -6,7 +6,7 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Shibare\Database\Izayoi;
+namespace Shibare\Database;
 
 use Iterator;
 use IteratorAggregate;

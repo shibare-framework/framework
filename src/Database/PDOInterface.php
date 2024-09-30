@@ -6,14 +6,14 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Shibare\Database\Izayoi;
+namespace Shibare\Database;
 
 use PDO;
 use PDOStatement;
 
 /**
  * PDO for mock
- * @package Shibare\Database\Izayoi\PDO
+ * @package Shibare\Database
  * @link https://www.php.net/manual/en/class.pdo.php
  */
 interface PDOInterface
