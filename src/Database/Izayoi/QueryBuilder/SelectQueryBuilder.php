@@ -8,34 +8,27 @@ declare(strict_types=1);
 
 namespace Shibare\Database\Izayoi\QueryBuilder;
 
-use Shibare\Database\Izayoi\QueryBuilderInterface;
+use Shibare\Database\Izayoi\SelectQueryBuilderInterface;
 
-class QueryBuilder implements QueryBuilderInterface
+class SelectQueryBuilder implements SelectQueryBuilderInterface
 {
+    use FromQueryBuilderTrait;
     use GroupByQueryBuilderTrait;
     use JoinQueryBuilderTrait;
     use OrderByQueryBuilderTrait;
     use SelectQueryBuilderTrait;
     use WhereQueryBuilderTrait;
-
-    protected ?string $table_name = null;
-
-    public function from(string $table_name): static
-    {
-        $this->table_name = $table_name;
-
-        return $this;
-    }
+    use QuotableTrait;
 
     protected function getBaseTableName(): string
     {
         if (\is_null($this->table_name)) {
-            throw new \RuntimeException('Table name is not set');
+            throw new \RuntimeException('Table name is not set'); // @codeCoverageIgnore
         }
         return $this->table_name;
     }
 
-    public function union(QueryBuilderInterface|array $builder): array
+    public function union(SelectQueryBuilderInterface|array $builder): array
     {
         $builders = \is_array($builder) ? $builder : [$builder];
 
@@ -77,27 +70,5 @@ class QueryBuilder implements QueryBuilderInterface
         $bindings = $where['bindings'];
 
         return compact('sql', 'bindings');
-    }
-
-    protected function buildFrom(): string
-    {
-        return \sprintf('FROM %s', $this->quoteTableName($this->getBaseTableName()));
-    }
-
-    protected function quoteTableName(string $table_name): string
-    {
-        return \sprintf('`%s`', $table_name);
-    }
-
-    protected function quoteColumnName(string $column): string
-    {
-        if (\str_contains($column, '.')) {
-            $parts = \explode('.', $column);
-            if (\count($parts) !== 2) {
-                throw new \InvalidArgumentException(\sprintf('Column cannot contain more than one dot "%s"', $column));
-            }
-            return \sprintf('`%s`.`%s`', $parts[0], $parts[1]);
-        }
-        return \sprintf('`%s`', $column);
     }
 }

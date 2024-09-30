@@ -94,5 +94,5 @@ trait OrderByQueryBuilderTrait
         return \sprintf('ORDER BY %s', \implode(', ', $lines));
     }
 
-    protected abstract function quoteColumnName(string $column): string;
+    public abstract function quoteColumnName(string $column): string;
 }

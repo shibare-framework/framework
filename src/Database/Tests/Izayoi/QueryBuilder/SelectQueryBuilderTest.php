@@ -15,22 +15,22 @@ use PHPUnit\Framework\TestCase;
 use Shibare\Database\Izayoi\QueryBuilder\GroupByQueryBuilderTrait;
 use Shibare\Database\Izayoi\QueryBuilder\JoinQueryBuilderTrait;
 use Shibare\Database\Izayoi\QueryBuilder\OrderByQueryBuilderTrait;
-use Shibare\Database\Izayoi\QueryBuilder\QueryBuilder;
+use Shibare\Database\Izayoi\QueryBuilder\SelectQueryBuilder;
 use Shibare\Database\Izayoi\QueryBuilder\SelectQueryBuilderTrait;
 use Shibare\Database\Izayoi\QueryBuilder\WhereQueryBuilderTrait;
 
-#[CoversClass(QueryBuilder::class)]
+#[CoversClass(SelectQueryBuilder::class)]
 #[CoversTrait(GroupByQueryBuilderTrait::class)]
 #[CoversTrait(JoinQueryBuilderTrait::class)]
 #[CoversTrait(OrderByQueryBuilderTrait::class)]
 #[CoversTrait(SelectQueryBuilderTrait::class)]
 #[CoversTrait(WhereQueryBuilderTrait::class)]
-final class QueryBuilderTest extends TestCase
+final class SelectQueryBuilderTest extends TestCase
 {
     #[Test]
     public function testBaseQuery(): void
     {
-        $builder = new QueryBuilder();
+        $builder = new SelectQueryBuilder();
 
         $expected = $builder->from('a')->buildRawSqlAndBindings();
 
@@ -41,10 +41,10 @@ final class QueryBuilderTest extends TestCase
     #[Test]
     public function testFromNotSet(): void
     {
-        $builder = new QueryBuilder();
+        $builder = new SelectQueryBuilder();
 
-        $this->expectException(\RuntimeException::class);
-        $this->expectExceptionMessage('Table name is not set');
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Table name is required');
 
         $builder->buildRawSqlAndBindings();
     }
@@ -52,10 +52,10 @@ final class QueryBuilderTest extends TestCase
     #[Test]
     public function testUnion(): void
     {
-        $builder1 = new QueryBuilder();
+        $builder1 = new SelectQueryBuilder();
         $builder1->from('a')->whereIn('b', [1, 2]);
 
-        $builder2 = new QueryBuilder();
+        $builder2 = new SelectQueryBuilder();
         $builder2->from('c')->whereIn('d', [3, 4]);
 
         $expected = $builder1->union($builder2);
@@ -63,10 +63,10 @@ final class QueryBuilderTest extends TestCase
         self::assertSame('SELECT * FROM `a` WHERE `b` IN (?, ?) UNION SELECT * FROM `c` WHERE `d` IN (?, ?)', $expected['sql']);
         self::assertSame([1, 2, 3, 4], $expected['bindings']);
 
-        $builder3 = new QueryBuilder();
+        $builder3 = new SelectQueryBuilder();
         $builder3->from('e')->whereEquals('f', 5);
 
-        $builder4 = new QueryBuilder();
+        $builder4 = new SelectQueryBuilder();
         $builder4->from('g')->whereEquals('h', 6);
 
         $expected = $builder1->union([$builder2, $builder3, $builder4]);
@@ -78,7 +78,7 @@ final class QueryBuilderTest extends TestCase
     #[Test]
     public function testSelectWhere(): void
     {
-        $builder = new QueryBuilder();
+        $builder = new SelectQueryBuilder();
 
         $builder->from('a')
             ->select(['b', 'c'])
@@ -103,7 +103,7 @@ final class QueryBuilderTest extends TestCase
     #[Test]
     public function testSelectOrWhere(): void
     {
-        $builder = new QueryBuilder();
+        $builder = new SelectQueryBuilder();
 
         $builder->from('a')
             ->select(['b', 'c'])
@@ -128,7 +128,7 @@ final class QueryBuilderTest extends TestCase
     #[Test]
     public function testWhereInvalid(): void
     {
-        $builder = new QueryBuilder();
+        $builder = new SelectQueryBuilder();
 
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('where operator is invalid operator, got "invalid"');
@@ -139,7 +139,7 @@ final class QueryBuilderTest extends TestCase
     #[Test]
     public function testOrWhereInvalid(): void
     {
-        $builder = new QueryBuilder();
+        $builder = new SelectQueryBuilder();
 
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('where operator is invalid operator, got "invalid"');
@@ -150,7 +150,7 @@ final class QueryBuilderTest extends TestCase
     #[Test]
     public function testWhereInEmpty(): void
     {
-        $builder = new QueryBuilder();
+        $builder = new SelectQueryBuilder();
 
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('values of whereIn query must not be empty');
@@ -161,7 +161,7 @@ final class QueryBuilderTest extends TestCase
     #[Test]
     public function testWhereNotInEmpty(): void
     {
-        $builder = new QueryBuilder();
+        $builder = new SelectQueryBuilder();
 
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('values of whereNotIn query must not be empty');
@@ -172,7 +172,7 @@ final class QueryBuilderTest extends TestCase
     #[Test]
     public function testOrWhereInEmpty(): void
     {
-        $builder = new QueryBuilder();
+        $builder = new SelectQueryBuilder();
 
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('values of whereIn query must not be empty');
@@ -183,7 +183,7 @@ final class QueryBuilderTest extends TestCase
     #[Test]
     public function testOrWhereNotInEmpty(): void
     {
-        $builder = new QueryBuilder();
+        $builder = new SelectQueryBuilder();
 
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('values of whereNotIn query must not be empty');
@@ -194,7 +194,7 @@ final class QueryBuilderTest extends TestCase
     #[Test]
     public function testGroupBy(): void
     {
-        $builder = new QueryBuilder();
+        $builder = new SelectQueryBuilder();
 
         $builder->from('a')
             ->groupBy('b')
@@ -209,7 +209,7 @@ final class QueryBuilderTest extends TestCase
     #[Test]
     public function testOrderBy(): void
     {
-        $builder = new QueryBuilder();
+        $builder = new SelectQueryBuilder();
 
         $builder->from('a')
             ->orderByAsc('b')
@@ -226,7 +226,7 @@ final class QueryBuilderTest extends TestCase
     #[Test]
     public function testOrderByEmpty(): void
     {
-        $builder = new QueryBuilder();
+        $builder = new SelectQueryBuilder();
 
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('orderBy method cannot be empty');
@@ -237,7 +237,7 @@ final class QueryBuilderTest extends TestCase
     #[Test]
     public function testOrderByEmptyColumnName(): void
     {
-        $builder = new QueryBuilder();
+        $builder = new SelectQueryBuilder();
 
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('orderBy method requires column name');
@@ -248,7 +248,7 @@ final class QueryBuilderTest extends TestCase
     #[Test]
     public function testOrderByInvalid(): void
     {
-        $builder = new QueryBuilder();
+        $builder = new SelectQueryBuilder();
 
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('orderBy method allows only ASC or DESC, got "invalid"');
@@ -259,7 +259,7 @@ final class QueryBuilderTest extends TestCase
     #[Test]
     public function testJoin(): void
     {
-        $builder = new QueryBuilder();
+        $builder = new SelectQueryBuilder();
 
         $builder->from('a')
             ->innerJoin('b', 'c', 'd')
@@ -276,7 +276,7 @@ final class QueryBuilderTest extends TestCase
     #[Test]
     public function testQuoteColumnNameInvalid(): void
     {
-        $builder = new QueryBuilder();
+        $builder = new SelectQueryBuilder();
 
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Column cannot contain more than one dot "a.b.c"');
@@ -287,7 +287,7 @@ final class QueryBuilderTest extends TestCase
     #[Test]
     public function testQuoteColumnName(): void
     {
-        $builder = new QueryBuilder();
+        $builder = new SelectQueryBuilder();
 
         $expected = $builder->from('a')->select(['a.b'])->buildRawSqlAndBindings();
 
@@ -298,7 +298,7 @@ final class QueryBuilderTest extends TestCase
     #[Test]
     public function testSelectRaw(): void
     {
-        $builder = new QueryBuilder();
+        $builder = new SelectQueryBuilder();
 
         $expected = $builder->from('a')->selectRaw(['MAX(b)'])->buildRawSqlAndBindings();
 

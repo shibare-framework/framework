@@ -408,5 +408,5 @@ trait WhereQueryBuilderTrait
         return \compact('sql', 'bindings');
     }
 
-    protected abstract function quoteColumnName(string $column): string;
+    public abstract function quoteColumnName(string $column): string;
 }
