@@ -6,12 +6,12 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Shibare\Database\Tests\Izayoi\QueryBuilder;
+namespace Shibare\Database\Tests\QueryBuilder;
 
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Shibare\Database\Izayoi\QueryBuilder\DeleteQueryBuilder;
+use Shibare\Database\QueryBuilder\DeleteQueryBuilder;
 
 #[CoversClass(DeleteQueryBuilder::class)]
 final class DeleteQueryBuilderTest extends TestCase

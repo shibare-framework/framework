@@ -6,12 +6,12 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Shibare\Database\Tests\Izayoi\QueryBuilder;
+namespace Shibare\Database\Tests\QueryBuilder;
 
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Shibare\Database\Izayoi\QueryBuilder\UpdateQueryBuilder;
+use Shibare\Database\QueryBuilder\UpdateQueryBuilder;
 
 #[CoversClass(UpdateQueryBuilder::class)]
 final class UpdateQueryBuilderTest extends TestCase

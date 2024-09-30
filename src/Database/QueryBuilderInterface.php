@@ -6,12 +6,12 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Shibare\Database\Izayoi;
+namespace Shibare\Database;
 
-use Shibare\Database\Izayoi\QueryBuilder\QuotableInterface;
+use Shibare\Database\QueryBuilder\QuotableInterface;
 
 /**
- * @package Shibare\Database\Izayoi
+ * @package Shibare\Database
  */
 interface QueryBuilderInterface extends QuotableInterface
 {

@@ -6,9 +6,9 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Shibare\Database\Izayoi\QueryBuilder;
+namespace Shibare\Database\QueryBuilder;
 
-use Shibare\Database\Izayoi\DeleteQueryBuilderInterface;
+use Shibare\Database\DeleteQueryBuilderInterface;
 
 class DeleteQueryBuilder implements DeleteQueryBuilderInterface
 {

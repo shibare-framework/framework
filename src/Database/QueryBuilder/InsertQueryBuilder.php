@@ -6,10 +6,10 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Shibare\Database\Izayoi\QueryBuilder;
+namespace Shibare\Database\QueryBuilder;
 
 use InvalidArgumentException;
-use Shibare\Database\Izayoi\InsertQueryBuilderInterface;
+use Shibare\Database\InsertQueryBuilderInterface;
 
 class InsertQueryBuilder implements InsertQueryBuilderInterface
 {

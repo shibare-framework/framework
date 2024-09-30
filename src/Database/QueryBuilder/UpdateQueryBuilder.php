@@ -6,9 +6,9 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Shibare\Database\Izayoi\QueryBuilder;
+namespace Shibare\Database\QueryBuilder;
 
-use Shibare\Database\Izayoi\UpdateQueryBuilderInterface;
+use Shibare\Database\UpdateQueryBuilderInterface;
 
 class UpdateQueryBuilder implements UpdateQueryBuilderInterface
 {

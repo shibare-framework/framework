@@ -6,13 +6,13 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Shibare\Database\Izayoi;
+namespace Shibare\Database;
 
-use Shibare\Database\Izayoi\QueryBuilder\QueryFromInterface;
-use Shibare\Database\Izayoi\QueryBuilder\QueryWhereInterface;
+use Shibare\Database\QueryBuilder\QueryFromInterface;
+use Shibare\Database\QueryBuilder\QueryWhereInterface;
 
 /**
- * @package Shibare\Database\Izayoi
+ * @package Shibare\Database
  */
 interface UpdateQueryBuilderInterface extends
     QueryBuilderInterface,

@@ -6,18 +6,18 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Shibare\Database\Tests\Izayoi\QueryBuilder;
+namespace Shibare\Database\Tests\QueryBuilder;
 
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\CoversTrait;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Shibare\Database\Izayoi\QueryBuilder\GroupByQueryBuilderTrait;
-use Shibare\Database\Izayoi\QueryBuilder\JoinQueryBuilderTrait;
-use Shibare\Database\Izayoi\QueryBuilder\OrderByQueryBuilderTrait;
-use Shibare\Database\Izayoi\QueryBuilder\SelectQueryBuilder;
-use Shibare\Database\Izayoi\QueryBuilder\SelectQueryBuilderTrait;
-use Shibare\Database\Izayoi\QueryBuilder\WhereQueryBuilderTrait;
+use Shibare\Database\QueryBuilder\GroupByQueryBuilderTrait;
+use Shibare\Database\QueryBuilder\JoinQueryBuilderTrait;
+use Shibare\Database\QueryBuilder\OrderByQueryBuilderTrait;
+use Shibare\Database\QueryBuilder\SelectQueryBuilder;
+use Shibare\Database\QueryBuilder\SelectQueryBuilderTrait;
+use Shibare\Database\QueryBuilder\WhereQueryBuilderTrait;
 
 #[CoversClass(SelectQueryBuilder::class)]
 #[CoversTrait(GroupByQueryBuilderTrait::class)]
