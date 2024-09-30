@@ -6,12 +6,11 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Shibare\Database\Izayoi\Internal;
+namespace Shibare\Database\Izayoi;
 
 use ReflectionClass;
 use Shibare\Database\Izayoi\Attributes\Entity;
 use Shibare\Database\Izayoi\Attributes\PrimaryKey;
-use Shibare\Database\Izayoi\InvalidEntityDefinitionException;
 
 /**
  * @template TEntity of object

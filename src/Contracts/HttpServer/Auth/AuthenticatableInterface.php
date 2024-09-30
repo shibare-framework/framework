@@ -9,6 +9,4 @@ declare(strict_types=1);
 
 namespace Shibare\Contracts\HttpServer\Auth;
 
-interface AuthenticatableInterface
-{
-}
+interface AuthenticatableInterface {}

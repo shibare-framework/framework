@@ -6,7 +6,7 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Shibare\Database\Izayoi\Internal;
+namespace Shibare\Database\Izayoi\QueryBuilder;
 
 /**
  * Implements of QueryJoinInterface
@@ -27,7 +27,7 @@ trait JoinQueryBuilderTrait
      */
     public function innerJoin(string $join_table, string $my_key, string $relation_key): static
     {
-        $type = 'INNER';
+        $type = 'INNER JOIN';
         $this->join_list[] = \compact(
             'type',
             'join_table',
@@ -45,7 +45,7 @@ trait JoinQueryBuilderTrait
      */
     public function leftOuterJoin(string $join_table, string $my_key, string $relation_key): static
     {
-        $type = 'LEFT OUTER';
+        $type = 'LEFT OUTER JOIN';
         $this->join_list[] = \compact(
             'type',
             'join_table',
@@ -63,7 +63,7 @@ trait JoinQueryBuilderTrait
      */
     public function rightOuterJoin(string $join_table, string $my_key, string $relation_key): static
     {
-        $type = 'RIGHT OUTER';
+        $type = 'RIGHT OUTER JOIN';
         $this->join_list[] = \compact(
             'type',
             'join_table',
@@ -81,7 +81,7 @@ trait JoinQueryBuilderTrait
      */
     public function fullOuterJoin(string $join_table, string $my_key, string $relation_key): static
     {
-        $type = 'FULL OUTER';
+        $type = 'FULL OUTER JOIN';
         $this->join_list[] = \compact(
             'type',
             'join_table',
@@ -95,11 +95,10 @@ trait JoinQueryBuilderTrait
     {
         $lines = [];
         foreach ($this->join_list as $join) {
-            // TODO: quote
             $lines[] = \sprintf(
                 '%s `%s` ON `%s`.`%s` = `%s`.`%s`',
                 $join['type'],
-                $this->getBaseTableName(),
+                $join['join_table'],
                 $this->getBaseTableName(),
                 $join['my_key'],
                 $join['join_table'],

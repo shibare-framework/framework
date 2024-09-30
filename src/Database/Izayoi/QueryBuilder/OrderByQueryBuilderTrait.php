@@ -6,7 +6,7 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Shibare\Database\Izayoi\Internal;
+namespace Shibare\Database\Izayoi\QueryBuilder;
 
 use InvalidArgumentException;
 
@@ -27,13 +27,11 @@ trait OrderByQueryBuilderTrait
     public function orderByDesc(string|array $columns): static
     {
         $c = \is_array($columns) ? $columns : [$columns];
-        $this->order_by_list = [];
+        $orders = [];
         foreach ($c as $column) {
-            $this->order_by_list[] = [
-                'column' => $column,
-                'order' => 'DESC',
-            ];
+            $orders[] = [$column, 'DESC'];
         }
+        $this->orderBy($orders);
         return $this;
     }
 
@@ -45,13 +43,11 @@ trait OrderByQueryBuilderTrait
     public function orderByAsc(string|array $columns): static
     {
         $c = \is_array($columns) ? $columns : [$columns];
-        $this->order_by_list = [];
+        $orders = [];
         foreach ($c as $column) {
-            $this->order_by_list[] = [
-                'column' => $column,
-                'order' => 'ASC',
-            ];
+            $orders[] = [$column, 'ASC'];
         }
+        $this->orderBy($orders);
         return $this;
     }
 
@@ -61,15 +57,20 @@ trait OrderByQueryBuilderTrait
      * ```php
      * $builder->orderBy(['user_id', 'DESC'], ['updated_at', 'ASC']);
      * ```
-     * @param list<list{string, string}> $columns
+     * @param list<string[]> $columns
      * @return static
      */
     public function orderBy(array $columns): static
     {
-        $this->order_by_list = [];
+        if (\count($columns) === 0) {
+            throw new InvalidArgumentException('orderBy method cannot be empty');
+        }
         foreach ($columns as $column) {
+            if (\count($column) !== 2 || $column[0] === '') {
+                throw new InvalidArgumentException('orderBy method requires column name');
+            }
             if ($column[1] !== 'ASC' && $column[1] !== 'DESC') {
-                throw new InvalidArgumentException('orderBy method allows only ASC or DESC, got ' . $column[1]);
+                throw new InvalidArgumentException(\sprintf('orderBy method allows only ASC or DESC, got "%s"', $column[1]));
             }
             $this->order_by_list[] = [
                 'column' => $column[0],
@@ -88,8 +89,10 @@ trait OrderByQueryBuilderTrait
         $lines = [];
         foreach ($this->order_by_list as $orderBy) {
             // TODO: quote
-            $lines[] = \sprintf('`%s` %s', $orderBy['column'], $orderBy['order']);
+            $lines[] = \sprintf('%s %s', $this->quoteColumnName($orderBy['column']), $orderBy['order']);
         }
         return \sprintf('ORDER BY %s', \implode(', ', $lines));
     }
+
+    protected abstract function quoteColumnName(string $column): string;
 }

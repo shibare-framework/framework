@@ -6,7 +6,7 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Shibare\Database\Izayoi\Internal;
+namespace Shibare\Database\Izayoi\QueryBuilder;
 
 /**
  * Implements of QuerySelectInterface
@@ -26,8 +26,7 @@ trait SelectQueryBuilderTrait
     {
         $this->select_list = [];
         foreach ($columns as $column) {
-            // TODO: quote
-            $this->select_list[] = \sprintf('`%s`', $column);
+            $this->select_list[] = $this->quoteColumnName($column);
         }
 
         return $this;
@@ -51,4 +50,6 @@ trait SelectQueryBuilderTrait
         }
         return \sprintf('SELECT %s', \implode(', ', $this->select_list));
     }
+
+    protected abstract function quoteColumnName(string $column): string;
 }

@@ -6,7 +6,7 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Shibare\Database\Izayoi\Internal;
+namespace Shibare\Database\Izayoi\QueryBuilder;
 
 use InvalidArgumentException;
 
@@ -35,10 +35,10 @@ trait WhereQueryBuilderTrait
     public function where(string $column, string $operator, int|float|string $value): static
     {
         if (!\in_array($operator, ['=', '>', '<', '>=', '<=', '<>'], true)) {
-            throw new InvalidArgumentException('where operator is invalid operator=' . $operator);
+            throw new InvalidArgumentException(\sprintf('where operator is invalid operator, got "%s"', $operator));
         }
         $this->where_list[] = [
-            'sql' => \sprintf('`%s` %s ?', $column, $operator),
+            'sql' => \sprintf('%s %s ?', $this->quoteColumnName($column), $operator),
             'bindings' => [$value],
             'connection' => 'AND',
         ];
@@ -79,7 +79,7 @@ trait WhereQueryBuilderTrait
             throw new InvalidArgumentException('values of whereIn query must not be empty');
         }
         $this->where_list[] = [
-            'sql' => \sprintf('`%s` IN (%s)', $column, \rtrim(\str_repeat('?, ', \count($values)), ', ')),
+            'sql' => \sprintf('%s IN (%s)', $this->quoteColumnName($column), \rtrim(\str_repeat('?, ', \count($values)), ', ')),
             'bindings' => $values,
             'connection' => 'AND',
         ];
@@ -95,10 +95,10 @@ trait WhereQueryBuilderTrait
     public function whereNotIn(string $column, array $values): static
     {
         if (count($values) === 0) {
-            throw new InvalidArgumentException('values of whereIn query must not be empty');
+            throw new InvalidArgumentException('values of whereNotIn query must not be empty');
         }
         $this->where_list[] = [
-            'sql' => \sprintf('`%s` NOT IN (%s)', $column, \rtrim(\str_repeat('?, ', \count($values)), ', ')),
+            'sql' => \sprintf('%s NOT IN (%s)', $this->quoteColumnName($column), \rtrim(\str_repeat('?, ', \count($values)), ', ')),
             'bindings' => $values,
             'connection' => 'AND',
         ];
@@ -113,7 +113,7 @@ trait WhereQueryBuilderTrait
     public function whereIsNull(string $column): static
     {
         $this->where_list[] = [
-            'sql' => \sprintf('`%s` IS NULL', $column),
+            'sql' => \sprintf('%s IS NULL', $this->quoteColumnName($column)),
             'bindings' => [],
             'connection' => 'AND',
         ];
@@ -128,7 +128,7 @@ trait WhereQueryBuilderTrait
     public function whereIsNotNull(string $column): static
     {
         $this->where_list[] = [
-            'sql' => \sprintf('`%s` IS NOT NULL', $column),
+            'sql' => \sprintf('%s IS NOT NULL', $this->quoteColumnName($column)),
             'bindings' => [],
             'connection' => 'AND',
         ];
@@ -145,7 +145,7 @@ trait WhereQueryBuilderTrait
     public function whereBetween(string $column, int|float $from, int|float $to): static
     {
         $this->where_list[] = [
-            'sql' => \sprintf('`%s` BETWEEN ? AND ?', $column),
+            'sql' => \sprintf('%s BETWEEN ? AND ?', $this->quoteColumnName($column)),
             'bindings' => [$from, $to],
             'connection' => 'AND',
         ];
@@ -162,7 +162,7 @@ trait WhereQueryBuilderTrait
     public function whereNotBetween(string $column, int|float $from, int|float $to): static
     {
         $this->where_list[] = [
-            'sql' => \sprintf('`%s` NOT BETWEEN ? AND ?', $column),
+            'sql' => \sprintf('%s NOT BETWEEN ? AND ?', $this->quoteColumnName($column)),
             'bindings' => [$from, $to],
             'connection' => 'AND',
         ];
@@ -178,7 +178,7 @@ trait WhereQueryBuilderTrait
     public function whereLike(string $column, string $pattern): static
     {
         $this->where_list[] = [
-            'sql' => \sprintf('`%s` LIKE ?', $column),
+            'sql' => \sprintf('%s LIKE ?', $this->quoteColumnName($column)),
             'bindings' => [$pattern],
             'connection' => 'AND',
         ];
@@ -194,7 +194,7 @@ trait WhereQueryBuilderTrait
     public function whereNotLike(string $column, string $pattern): static
     {
         $this->where_list[] = [
-            'sql' => \sprintf('`%s` NOT LIKE ?', $column),
+            'sql' => \sprintf('%s NOT LIKE ?', $this->quoteColumnName($column)),
             'bindings' => [$pattern],
             'connection' => 'AND',
         ];
@@ -211,10 +211,10 @@ trait WhereQueryBuilderTrait
     public function orWhere(string $column, string $operator, int|float|string $value): static
     {
         if (!\in_array($operator, ['=', '>', '<', '>=', '<=', '<>'], true)) {
-            throw new InvalidArgumentException('where operator is invalid operator=' . $operator);
+            throw new InvalidArgumentException(\sprintf('where operator is invalid operator, got "%s"', $operator));
         }
         $this->where_list[] = [
-            'sql' => \sprintf('`%s` %s ?', $column, $operator),
+            'sql' => \sprintf('%s %s ?', $this->quoteColumnName($column), $operator),
             'bindings' => [$value],
             'connection' => 'OR',
         ];
@@ -255,7 +255,7 @@ trait WhereQueryBuilderTrait
             throw new InvalidArgumentException('values of whereIn query must not be empty');
         }
         $this->where_list[] = [
-            'sql' => \sprintf('`%s` IN (%s)', $column, \rtrim(\str_repeat('?, ', \count($values)), ', ')),
+            'sql' => \sprintf('%s IN (%s)', $this->quoteColumnName($column), \rtrim(\str_repeat('?, ', \count($values)), ', ')),
             'bindings' => $values,
             'connection' => 'OR',
         ];
@@ -271,10 +271,10 @@ trait WhereQueryBuilderTrait
     public function orWhereNotIn(string $column, array $values): static
     {
         if (count($values) === 0) {
-            throw new InvalidArgumentException('values of whereIn query must not be empty');
+            throw new InvalidArgumentException('values of whereNotIn query must not be empty');
         }
         $this->where_list[] = [
-            'sql' => \sprintf('`%s` NOT IN (%s)', $column, \rtrim(\str_repeat('?, ', \count($values)), ', ')),
+            'sql' => \sprintf('%s NOT IN (%s)', $this->quoteColumnName($column), \rtrim(\str_repeat('?, ', \count($values)), ', ')),
             'bindings' => $values,
             'connection' => 'OR',
         ];
@@ -289,7 +289,7 @@ trait WhereQueryBuilderTrait
     public function orWhereIsNull(string $column): static
     {
         $this->where_list[] = [
-            'sql' => \sprintf('`%s` IS NULL', $column),
+            'sql' => \sprintf('%s IS NULL', $this->quoteColumnName($column)),
             'bindings' => [],
             'connection' => 'OR',
         ];
@@ -304,7 +304,7 @@ trait WhereQueryBuilderTrait
     public function orWhereIsNotNull(string $column): static
     {
         $this->where_list[] = [
-            'sql' => \sprintf('`%s` IS NOT NULL', $column),
+            'sql' => \sprintf('%s IS NOT NULL', $this->quoteColumnName($column)),
             'bindings' => [],
             'connection' => 'OR',
         ];
@@ -321,7 +321,7 @@ trait WhereQueryBuilderTrait
     public function orWhereBetween(string $column, int|float $from, int|float $to): static
     {
         $this->where_list[] = [
-            'sql' => \sprintf('`%s` BETWEEN ? AND ?', $column),
+            'sql' => \sprintf('%s BETWEEN ? AND ?', $this->quoteColumnName($column)),
             'bindings' => [$from, $to],
             'connection' => 'OR',
         ];
@@ -338,7 +338,7 @@ trait WhereQueryBuilderTrait
     public function orWhereNotBetween(string $column, int|float $from, int|float $to): static
     {
         $this->where_list[] = [
-            'sql' => \sprintf('`%s` NOT BETWEEN ? AND ?', $column),
+            'sql' => \sprintf('%s NOT BETWEEN ? AND ?', $this->quoteColumnName($column)),
             'bindings' => [$from, $to],
             'connection' => 'OR',
         ];
@@ -354,7 +354,7 @@ trait WhereQueryBuilderTrait
     public function orWhereLike(string $column, string $pattern): static
     {
         $this->where_list[] = [
-            'sql' => \sprintf('`%s` LIKE ?', $column),
+            'sql' => \sprintf('%s LIKE ?', $this->quoteColumnName($column)),
             'bindings' => [$pattern],
             'connection' => 'OR',
         ];
@@ -370,7 +370,7 @@ trait WhereQueryBuilderTrait
     public function orWhereNotLike(string $column, string $pattern): static
     {
         $this->where_list[] = [
-            'sql' => \sprintf('`%s` NOT LIKE ?', $column),
+            'sql' => \sprintf('%s NOT LIKE ?', $this->quoteColumnName($column)),
             'bindings' => [$pattern],
             'connection' => 'OR',
         ];
@@ -391,20 +391,22 @@ trait WhereQueryBuilderTrait
             ];
         }
 
-        $sql = 'WHERE ';
+        $sql = '';
         $bindings = [];
 
         foreach ($this->where_list as $where) {
             $sql .= \sprintf(
-                '%s %s',
+                ' %s %s',
                 $where['connection'],
                 $where['sql'],
             );
             $bindings = array_merge($bindings, $where['bindings']);
         }
 
-        $sql = \ltrim('AND ', \ltrim('OR ', $sql));
+        $sql = 'WHERE ' . \ltrim(\ltrim($sql, ' OR '), ' AND ');
 
         return \compact('sql', 'bindings');
     }
+
+    protected abstract function quoteColumnName(string $column): string;
 }

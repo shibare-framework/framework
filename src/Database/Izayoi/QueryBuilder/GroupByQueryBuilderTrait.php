@@ -6,7 +6,7 @@ declare(strict_types=1);
  * @license Apache-2.0
  */
 
-namespace Shibare\Database\Izayoi\Internal;
+namespace Shibare\Database\Izayoi\QueryBuilder;
 
 /**
  * Implements of QueryGroupByInterface
@@ -15,7 +15,7 @@ namespace Shibare\Database\Izayoi\Internal;
 trait GroupByQueryBuilderTrait
 {
     /** @var string[] $group_by_list */
-    private array $group_by_list = [];
+    protected array $group_by_list = [];
 
     /**
      * Adds GROUP BY foo, bar
@@ -24,12 +24,10 @@ trait GroupByQueryBuilderTrait
      */
     public function groupBy(string|array $columns): static
     {
-        $this->group_by_list = [];
         $c = \is_array($columns) ? $columns : [$columns];
 
         foreach ($c as $column) {
-            // TODO: Quote
-            $this->group_by_list[] = \sprintf('`%s`', $column);
+            $this->group_by_list[] = $this->quoteColumnName($column);
         }
 
         return $this;
@@ -43,4 +41,6 @@ trait GroupByQueryBuilderTrait
 
         return \sprintf('GROUP BY %s', \implode(', ', $this->group_by_list));
     }
+
+    protected abstract function quoteColumnName(string $column): string;
 }
