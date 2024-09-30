@@ -42,5 +42,5 @@ trait GroupByQueryBuilderTrait
         return \sprintf('GROUP BY %s', \implode(', ', $this->group_by_list));
     }
 
-    public abstract function quoteColumnName(string $column): string;
+    abstract public function quoteColumnName(string $column): string;
 }

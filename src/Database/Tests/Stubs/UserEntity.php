@@ -8,12 +8,15 @@ declare(strict_types=1);
 
 namespace Shibare\Database\Tests\Stubs;
 
+use SensitiveParameter;
 use Shibare\Database\Izayoi\Attributes\Column;
 use Shibare\Database\Izayoi\Attributes\Entity;
-use Shibare\Database\Izayoi\Attributes\PrimaryKey;
+use Shibare\Database\Izayoi\Attributes\PrimaryKeys;
 use Shibare\Database\Izayoi\Relations\HasMany;
+use Shibare\Database\Schema\ColumnType;
 
 #[Entity(table: 'users')]
+#[PrimaryKeys(['id'])]
 class UserEntity
 {
     /**
@@ -24,18 +27,23 @@ class UserEntity
 
     /**
      * @param Identity<UserEntity> $id
-     * @param string $user_name
-     * @param string $token
+     * @param non-empty-string $user_name
+     * @param non-empty-string $token
      */
     public function __construct(
-        #[PrimaryKey]
+        #[Column('id', type: ColumnType::STRING)]
         public readonly Identity $id,
-        #[Column]
+        #[Column('user_name', ColumnType::STRING)]
         private string $user_name,
-        #[Column]
+        #[Column('token', ColumnType::STRING)]
+        #[SensitiveParameter]
         private string $token,
     ) {}
 
+    /**
+     * @param non-empty-string $name
+     * @return void
+     */
     public function updateUserName(string $name): void
     {
         $this->user_name = $name;

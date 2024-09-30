@@ -10,11 +10,13 @@ namespace Shibare\Database\Tests\Stubs;
 
 use Shibare\Database\Izayoi\Attributes\Column;
 use Shibare\Database\Izayoi\Attributes\Entity;
-use Shibare\Database\Izayoi\Attributes\PrimaryKey;
-use Shibare\Database\Izayoi\Attributes\UniqueIndexes;
+use Shibare\Database\Izayoi\Attributes\Indexes;
+use Shibare\Database\Izayoi\Attributes\PrimaryKeys;
+use Shibare\Database\Schema\ColumnType;
 
 #[Entity(table: 'mst_weapons')]
-#[UniqueIndexes(['id', 'level'])]
+#[Indexes(columns: ['id', 'level'], unique: true)]
+#[PrimaryKeys(['id'])]
 class MasterWeapon
 {
     /**
@@ -23,11 +25,11 @@ class MasterWeapon
      * @param int $attack
      */
     public function __construct(
-        #[PrimaryKey]
+        #[Column(name: 'id', type: ColumnType::STRING)]
         public readonly Identity $id,
-        #[Column]
+        #[Column(name: 'level', type: ColumnType::INTEGER)]
         public readonly int $level,
-        #[Column]
+        #[Column(name: 'attack', type: ColumnType::INTEGER)]
         public readonly int $attack,
     ) {}
 }

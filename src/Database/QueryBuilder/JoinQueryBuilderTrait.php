@@ -109,5 +109,5 @@ trait JoinQueryBuilderTrait
         return \implode(' ', $lines);
     }
 
-    protected abstract function getBaseTableName(): string;
+    abstract protected function getBaseTableName(): string;
 }

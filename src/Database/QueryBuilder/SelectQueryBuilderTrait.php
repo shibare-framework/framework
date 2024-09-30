@@ -51,5 +51,5 @@ trait SelectQueryBuilderTrait
         return \sprintf('SELECT %s', \implode(', ', $this->select_list));
     }
 
-    public abstract function quoteColumnName(string $column): string;
+    abstract public function quoteColumnName(string $column): string;
 }

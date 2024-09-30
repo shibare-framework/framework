@@ -10,13 +10,18 @@ namespace Shibare\Database\Izayoi\Attributes;
 
 use Attribute;
 
+/**
+ * Relational database primary key attribute
+ */
 #[Attribute(Attribute::TARGET_CLASS)]
-final class UniqueIndexes
+class PrimaryKeys extends Indexes
 {
     /**
      * @param non-empty-string[] $columns
      */
     public function __construct(
-        public readonly array $columns,
-    ) {}
+        array $columns,
+    ) {
+        parent::__construct($columns, unique: true);
+    }
 }

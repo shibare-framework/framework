@@ -17,6 +17,4 @@ use Shibare\Database\QueryBuilder\QueryWhereInterface;
 interface DeleteQueryBuilderInterface extends
     QueryBuilderInterface,
     QueryFromInterface,
-    QueryWhereInterface
-{
-}
+    QueryWhereInterface {}

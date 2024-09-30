@@ -10,7 +10,7 @@ namespace Shibare\Database\Izayoi;
 
 use ReflectionClass;
 use Shibare\Database\Izayoi\Attributes\Entity;
-use Shibare\Database\Izayoi\Attributes\PrimaryKey;
+use Shibare\Database\Izayoi\Attributes\PrimaryKeys;
 
 /**
  * @template TEntity of object
@@ -43,7 +43,7 @@ class ReflectionEntity
         /** @var string[] */
         $pks = [];
         foreach ($ref->getProperties() as $prop) {
-            $pk = $prop->getAttributes(PrimaryKey::class);
+            $pk = $prop->getAttributes(PrimaryKeys::class);
             if (\count($pk) === 0) {
                 continue;
             }

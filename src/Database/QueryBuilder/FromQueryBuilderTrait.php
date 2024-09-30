@@ -32,5 +32,5 @@ trait FromQueryBuilderTrait
         return \sprintf('FROM %s', $this->quoteTableName($this->table_name));
     }
 
-    public abstract function quoteTableName(string $table_name): string;
+    abstract public function quoteTableName(string $table_name): string;
 }

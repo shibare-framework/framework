@@ -11,11 +11,19 @@ namespace Shibare\Database\Izayoi\Attributes;
 use Attribute;
 
 #[Attribute(Attribute::TARGET_CLASS)]
-final class Entity
+class Entity
 {
+    /**
+     * @param non-empty-string $table Table name
+     * @param null|non-empty-string $database Database name, @default null
+     */
     public function __construct(
         public readonly string $table,
-    ) {
-        \assert(strlen($this->table) > 0, '$table cannot be empty');
+        protected ?string $database = null,
+    ) {}
+
+    public function getDatabase(): ?string
+    {
+        return $this->database;
     }
 }

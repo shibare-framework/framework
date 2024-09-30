@@ -45,7 +45,7 @@ class UpdateQueryBuilder implements UpdateQueryBuilderInterface
         $sql = \sprintf(
             'UPDATE %s SET %s %s',
             $this->quoteTableName($this->getBaseTableName()),
-            \implode(', ', \array_map(fn (string $k): string => $this->quoteColumnName($k) . ' = ?', \array_keys($this->values))),
+            \implode(', ', \array_map(fn(string $k): string => $this->quoteColumnName($k) . ' = ?', \array_keys($this->values))),
             $where['sql'],
         );
 

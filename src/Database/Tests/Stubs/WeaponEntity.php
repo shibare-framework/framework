@@ -11,11 +11,13 @@ namespace Shibare\Database\Tests\Stubs;
 use Shibare\Database\Izayoi\Attributes\Column;
 use Shibare\Database\Izayoi\Attributes\Entity;
 use Shibare\Database\Izayoi\Attributes\Indexes;
-use Shibare\Database\Izayoi\Attributes\PrimaryKey;
+use Shibare\Database\Izayoi\Attributes\PrimaryKeys;
 use Shibare\Database\Izayoi\Relations\BelongsTo;
 use Shibare\Database\Izayoi\Relations\HasOne;
+use Shibare\Database\Schema\ColumnType;
 
 #[Entity(table: 'weapons')]
+#[PrimaryKeys(['id'])]
 #[Indexes(['user_id'])]
 class WeaponEntity
 {
@@ -30,9 +32,9 @@ class WeaponEntity
      * @param int $level
      */
     public function __construct(
-        #[PrimaryKey]
+        #[Column('id', type: ColumnType::STRING)]
         public readonly Identity $id,
-        #[Column]
+        #[Column('level', type: ColumnType::INTEGER)]
         private int $level,
     ) {}
 
