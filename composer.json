@@ -69,7 +69,7 @@
     "monolog/monolog": "^3.7.0",
     "nesbot/carbon": "^3.0.0",
     "phpstan/extension-installer": "^1.4",
-    "phpstan/phpstan": "^2.0.0",
+    "phpstan/phpstan": "^2.1.8",
     "phpstan/phpstan-mockery": "^2.0.0",
     "phpunit/phpunit": "^11.2.9",
     "spiral/roadrunner-http": "^3.5.0"
@@ -98,9 +98,9 @@
   "scripts": {
     "lint": [
       "./vendor/bin/phpstan analyse src",
-      "./tools/php-cs-fixer check"
+      "./vendor/bin/php-cs-fixer check"
     ],
-    "fix": "./tools/php-cs-fixer fix",
+    "fix": "./vendor/bin/php-cs-fixer fix",
     "test": "phpunit",
     "coverage": "php -d pcov.enabled=1 vendor/bin/phpunit --coverage-html=coverage",
     "coverage-html": "php -S localhost:8080 -t coverage",
