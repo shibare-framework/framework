@@ -218,7 +218,7 @@ use RuntimeException;
 
     /**
      * Recursively build uploaded files
-     * @return array<array-key, mixed>
+     * @return array<string, mixed>
      */
     public function buildUploadedFiles(): array
     {
@@ -236,22 +236,34 @@ use RuntimeException;
             array $tmp_names,
             array $sizes,
             array $errors,
-            ?array $names,
-            ?array $types,
+            array|null $names,
+            array|null $types,
         ) use (&$recursivelyNormalizeTree): array {
             $normalized = [];
 
             foreach ($tmp_names as $key => $value) {
+                \assert(\array_key_exists($key, $sizes));
+                \assert(\array_key_exists($key, $errors));
                 if (\is_array($value)) {
-                    \assert(\array_key_exists($key, $sizes));
-                    \assert(\array_key_exists($key, $errors));
+                    \assert(\is_array($sizes[$key]));
+                    \assert(\is_array($errors[$key]));
+                    $innerNames = null;
+                    if (\is_array($names)) {
+                        $innerNames = $names[$key] ?? null;
+                        \assert(\is_array($innerNames));
+                    }
+                    $innerTypes = null;
+                    if (\is_array($types)) {
+                        $innerTypes = $types[$key] ?? null;
+                        \assert(\is_array($innerTypes));
+                    }
                     // recursive
                     $normalized[$key] = $recursivelyNormalizeTree(
-                        $tmp_names[$key],
+                        $value,
                         $sizes[$key],
                         $errors[$key],
-                        $names[$key] ?? null,
-                        $types[$key] ?? null,
+                        $innerNames,
+                        $innerTypes,
                     );
                     continue;
                 }
@@ -259,12 +271,22 @@ use RuntimeException;
                 \assert(\array_key_exists($key, $errors));
                 \assert(\is_int($sizes[$key]));
                 \assert(\is_int($errors[$key]));
+                $name = null;
+                if (\is_array($names) && \array_key_exists('name', $names)) {
+                    $name = $names[$key];
+                    \assert(\is_string($name));
+                }
+                $type = null;
+                if (\is_array($types) && \array_key_exists('type', $types)) {
+                    $type = $types['type'];
+                    \assert(\is_string($type));
+                }
                 $normalized[$key] = new UploadedFile(
                     $tmp_names[$key],
                     $sizes[$key],
                     $errors[$key],
-                    $names[$key] ?? null,
-                    $types[$key] ?? null,
+                    $name,
+                    $type,
                 );
             }
 
@@ -283,20 +305,32 @@ use RuntimeException;
             } elseif (!\array_key_exists('error', $files) || !\is_array($files['error'])) {
                 throw new \InvalidArgumentException('Invalid uploaded files'); // @codeCoverageIgnore
             }
+            $name = null;
+            if (\array_key_exists('name', $files)) {
+                $name = $files['name'];
+                \assert(\is_array($name));
+            }
+            $type = null;
+            if (\array_key_exists('type', $files)) {
+                $type = $files['type'];
+                \assert(\is_array($type));
+            }
 
             return $recursivelyNormalizeTree(
                 $files['tmp_name'],
                 $files['size'],
                 $files['error'],
-                $files['name'] ?? null,
-                $files['type'] ?? null,
+                $name,
+                $type,
             );
         };
 
         foreach ($this->files as $key => $value) {
             if ($value instanceof UploadedFileInterface) {
-                $normalized[$key] = $value; // @codeCoverageIgnore
-                continue; // @codeCoverageIgnore
+                // @codeCoverageIgnoreStart
+                $normalized[$key] = $value;
+                continue;
+                // @codeCoverageIgnoreEnd
             }
 
             if (\is_array($value)) {
@@ -310,12 +344,22 @@ use RuntimeException;
                     \assert(\is_int($value['size']));
                     \assert(\array_key_exists('error', $value));
                     \assert(\is_int($value['error']));
+                    $name = null;
+                    if (\array_key_exists('name', $value)) {
+                        $name = $value['name'];
+                        \assert(\is_string($name));
+                    }
+                    $type = null;
+                    if (\array_key_exists('type', $value)) {
+                        $type = $value['type'];
+                        \assert(\is_string($type));
+                    }
                     $normalized[$key] = new UploadedFile(
                         $value['tmp_name'],
                         $value['size'],
                         $value['error'],
-                        $value['name'] ?? null,
-                        $value['type'] ?? null,
+                        $name,
+                        $type,
                     );
                     continue;
                 }

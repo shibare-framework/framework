@@ -70,26 +70,4 @@ final class InsertQueryBuilderTest extends TestCase
 
         $builder->buildRawSqlAndBindings();
     }
-
-    #[Test]
-    public function testValueIsNotAssoc(): void
-    {
-        $builder = new InsertQueryBuilder();
-
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('Record must be associative array');
-
-        $builder->into('a')->value([1, 2]);
-    }
-
-    #[Test]
-    public function testValueListIsNotList(): void
-    {
-        $builder = new InsertQueryBuilder();
-
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('Records must be list of associative array');
-
-        $builder->into('a')->valueList(['b' => 1]);
-    }
 }

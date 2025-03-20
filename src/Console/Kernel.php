@@ -83,7 +83,7 @@ class Kernel implements ContainerAwareInterface, LoggerAwareInterface
      * @param OutputInterface|null $output
      * @return int exit code, 0 is success
      */
-    public function run(InputInterface $input = null, OutputInterface $output = null): int
+    public function run(?InputInterface $input = null, ?OutputInterface $output = null): int
     {
         $input ??= new ArgvInput();
         $output ??= new ArrayOutput();

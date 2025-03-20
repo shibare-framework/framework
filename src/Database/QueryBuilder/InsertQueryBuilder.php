@@ -29,19 +29,11 @@ class InsertQueryBuilder implements InsertQueryBuilderInterface
 
     public function value(array $record): static
     {
-        if (\array_is_list($record)) {
-            throw new InvalidArgumentException('Record must be associative array');
-        }
-
         return $this->valueList([$record]);
     }
 
     public function valueList(array $records): static
     {
-        if (!\array_is_list($records)) {
-            throw new InvalidArgumentException('Records must be list of associative array');
-        }
-
         $this->values = $records;
 
         return $this;

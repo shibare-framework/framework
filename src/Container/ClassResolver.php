@@ -166,6 +166,7 @@ class ClassResolver
             }
 
             $type_name = \method_exists($type, 'getName') ? $type->getName() : '';
+            \assert(\is_string($type_name));
             return ClassResolverResult::failed(
                 new ReflectionException(\sprintf('unknown type for parameter "%s $%s"', $type_name, $param->getName())),
             );

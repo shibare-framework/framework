@@ -13,8 +13,8 @@ use stdClass;
 
 final class StubClass1
 {
-    // @phpstan-ignore-next-line
     public function __construct(
+        // @phpstan-ignore constructor.unusedParameter
         stdClass $a,
     ) {}
 }

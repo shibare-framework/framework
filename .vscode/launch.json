@@ -1,0 +1,49 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run PHPUnit",
+      "type": "php",
+      "request": "launch",
+      "program": "${workspaceFolder}/vendor/bin/phpunit",
+      "cwd": "${workspaceFolder}",
+      "runtimeArgs": [
+        "-d",
+        "xdebug.mode=off"
+      ]
+    },
+    {
+      "name": "Run Lint",
+      "type": "php",
+      "request": "launch",
+      "program": "${workspaceFolder}/vendor/bin/php-cs-fixer",
+      "args": [
+        "check"
+      ],
+      "cwd": "${workspaceFolder}",
+      "runtimeArgs": [
+        "-d",
+        "xdebug.mode=off"
+      ],
+      "env": {
+        "PHP_CS_FIXER_IGNORE_ENV": "true"
+      }
+    },
+    {
+      "name": "Run PHPStan",
+      "type": "php",
+      "request": "launch",
+      "program": "${workspaceFolder}/vendor/bin/phpstan",
+      "args": [
+        "analyse",
+        "--memory-limit",
+        "1G"
+      ],
+      "cwd": "${workspaceFolder}",
+      "runtimeArgs": [
+        "-d",
+        "xdebug.mode=off"
+      ]
+    }
+  ]
+}

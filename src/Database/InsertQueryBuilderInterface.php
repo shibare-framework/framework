@@ -22,14 +22,14 @@ interface InsertQueryBuilderInterface extends QueryBuilderInterface
 
     /**
      * Value one record
-     * @param array<array-key, mixed> $record
+     * @param array<string, scalar> $record
      * @return static
      */
     public function value(array $record): static;
 
     /**
      * Values multiple records
-     * @param array<array-key, mixed> $records
+     * @param list<array<string, scalar>> $records
      * @return static
      */
     public function valueList(array $records): static;

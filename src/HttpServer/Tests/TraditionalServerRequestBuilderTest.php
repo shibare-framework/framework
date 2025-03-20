@@ -674,6 +674,7 @@ Apache/2.4.61 (Debian) Server at 7dff-2404-7a83-8a00-c700-eced-aaa1-902b-5fc4.ng
         self::assertArrayHasKey('details', $actual['my-form']);
         self::assertIsArray($actual['my-form']['details']);
         self::assertArrayHasKey('avatars', $actual['my-form']['details']);
+        self::assertIsArray($actual['my-form']['details']['avatars']);
         self::assertCount(3, $actual['my-form']['details']['avatars']);
         self::assertInstanceOf(UploadedFileInterface::class, $actual['my-form']['details']['avatars'][0]);
         self::assertInstanceOf(UploadedFileInterface::class, $actual['my-form']['details']['avatars'][1]);

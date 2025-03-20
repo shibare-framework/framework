@@ -17,6 +17,7 @@ jobs:
         php-versions:
           - '8.2'
           - '8.3'
+          - '8.4'
         deps:
           - 'highest'
           - 'lowest'
@@ -29,10 +30,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup cache Environment
         id: extcache
-        uses: shivammathur/cache-extensions@v1
+        uses: shivammathur/cache-extensions@bbc38874818912d705835e232803362e231134d0
         with:
           php-version: ${{ matrix.php-versions }}
           extensions: ${{ env.extensions }}
@@ -46,12 +49,11 @@ jobs:
           restore-keys: ${{ steps.extcache.outputs.key }}
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@9e72090525849c5e82e596468b86eb55e9cc5401
         with:
           php-version: ${{ matrix.php-versions }}
           extensions: ${{ env.extensions }}
           coverage: pcov
-          tools: phive
         env:
           fail-fast: true
 
@@ -74,9 +76,6 @@ jobs:
             composer update --prefer-stable --no-progress --ansi --prefer-dist
           fi
 
-      - name: Install phive tools
-        run: phive install --copy --trust-gpg-keys E82B2FB314E9906E,51C67305FFC2E5C0,12CE0F1D262429A5
-
       - name: Install composer dependencies
         run: |-
           for dir in $(find src -type d); do
@@ -89,15 +88,14 @@ jobs:
             fi
           done
 
-      - name: Run PHPStan/Psalm/PHP-CS-Fixer
+      - name: Run PHPStan/PHP-CS-Fixer
         run: composer lint
 
       - name: Run Coverage
         run: composer coverage-xml
 
-      # - name: SonarCloud Scan
-      #   uses: SonarSource/sonarcloud-github-action@master
-      #   if: matrix.deps == 'highest' && matrix.php-versions == '8.3'
-      #   env:
-      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: SonarQube Cloud Scan
+        uses: SonarSource/sonarcloud-github-action@0303d6b62e310685c0e34d0b9cde218036885c4d
+        if: matrix.deps == 'highest' && matrix.php-versions == '8.3'
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

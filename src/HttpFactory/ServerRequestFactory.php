@@ -28,6 +28,7 @@ final /* readonly */ class ServerRequestFactory implements ServerRequestFactoryI
      */
     public function createServerRequest(string $method, $uri, array $serverParams = []): ServerRequestInterface
     {
+        // @phpstan-ignore argument.type
         return new ServerRequest($method, $uri, [], null, '1.1', $serverParams);
     }
 }

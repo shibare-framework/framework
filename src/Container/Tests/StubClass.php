@@ -11,11 +11,20 @@ namespace Shibare\Container\Tests;
 
 final class StubClass
 {
-    // @phpstan-ignore-next-line
+    /**
+     * @param mixed $a
+     * @param float $b
+     * @param int $c
+     * @param array<array-key, mixed> ...$d
+     */
     public function __construct(
+        // @phpstan-ignore-next-line
         $a,
+        // @phpstan-ignore constructor.unusedParameter
         float $b,
+        // @phpstan-ignore constructor.unusedParameter
         int $c = 1,
-        ...$d,
+        // @phpstan-ignore constructor.unusedParameter
+        array ...$d,
     ) {}
 }

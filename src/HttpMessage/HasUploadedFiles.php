@@ -33,7 +33,7 @@ trait HasUploadedFiles
 
     /**
      * With uploaded files
-     * @param array<array-key, mixed> $uploadedFiles
+     * @param array<string, mixed> $uploadedFiles
      * @return ServerRequestInterface
      * @throws InvalidArgumentException
      */

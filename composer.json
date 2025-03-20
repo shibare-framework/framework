@@ -49,7 +49,6 @@
   },
   "require": {
     "php": "~8.2.0|~8.3.0|~8.4.0",
-    "ext-pdo": "*",
     "psr/cache": "^3.0.0",
     "psr/clock": "^1.0.0",
     "psr/container": "^2.0.0",
@@ -65,12 +64,13 @@
   "require-dev": {
     "ext-pdo_mysql": "*",
     "cakephp/chronos": "^3.0.0",
+    "friendsofphp/php-cs-fixer": "^3.73",
     "mockery/mockery": "^1.6",
     "monolog/monolog": "^3.7.0",
     "nesbot/carbon": "^3.0.0",
     "phpstan/extension-installer": "^1.4",
-    "phpstan/phpstan": "^1.12",
-    "phpstan/phpstan-mockery": "^1.1",
+    "phpstan/phpstan": "^2.0.0",
+    "phpstan/phpstan-mockery": "^2.0.0",
     "phpunit/phpunit": "^11.2.9",
     "spiral/roadrunner-http": "^3.5.0"
   },

@@ -11,8 +11,8 @@ namespace Shibare\Container\Tests;
 
 final class CircularDepsA
 {
-    // @phpstan-ignore constructor.unusedParameter
     public function __construct(
+        // @phpstan-ignore constructor.unusedParameter
         CircularDepsB $b,
     ) {}
 }
