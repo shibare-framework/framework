@@ -94,8 +94,8 @@ jobs:
       - name: Run Coverage
         run: composer coverage-xml
 
-      - name: SonarQube Cloud Scan
-        uses: SonarSource/sonarcloud-github-action@0303d6b62e310685c0e34d0b9cde218036885c4d
-        if: matrix.deps == 'highest' && matrix.php-versions == '8.3'
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@0303d6b62e310685c0e34d0b9cde218036885c4d
+        if: matrix.deps == 'highest' && matrix.php-versions == '8.4'
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
